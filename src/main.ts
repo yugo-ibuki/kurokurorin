@@ -1,28 +1,23 @@
-import puppeteer from 'puppeteer'
 import type { Target } from './libs/login.ts'
-import { login } from './libs/login.ts'
 import { data } from './fixtures/loginData'
+import { Browser } from './packages/Browser'
 
 const loginData: Target[] = data
 
 const main = async () => {
-  const browser = await puppeteer.launch({
-    // headless: 'new',
-    headless: false,
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--incognito']
-  })
-  const page = await browser.newPage()
+  const browser = await Browser.create()
+  const page = await browser.createPage()
 
-  const ok = await login(page, loginData)
-  if (!ok) {
+  const isLoggedIn = await page.login(loginData)
+  if (!isLoggedIn) {
+    console.log('ログインに失敗しました')
     await page.close()
     await browser.close()
-    throw new Error('login failed')
+    return
   }
 
-  const cookies = await page.cookies()
+  const cookies = await page.getCookies()
   console.log(cookies)
-
   await page.close()
   await browser.close()
 }
