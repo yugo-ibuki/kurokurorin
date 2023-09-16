@@ -1,0 +1,37 @@
+{
+  "root": true,
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "plugins": ["prettier", "@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "parser": "babel-eslint",
+    "sourceType": "module",
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      "tsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "semi": ["error", "never", { "beforeStatementContinuationChars": "never"}],
+    "no-unexpected-multiline": "error",
+    "no-unreachable": "error",
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      { "prefer": "type-imports" }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      { "selector": ["typeAlias", "typeParameter"], "format": ["PascalCase"] }
+    ]
+  }
+}
