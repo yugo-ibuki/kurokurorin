@@ -16,7 +16,12 @@ export class Page {
   }
 
   public async login(loginData: Target[]) {
-    return await login(this._page, loginData)
+    try {
+      return await login(this._page, loginData)
+    } catch (e) {
+      console.error(e)
+      return false
+    }
   }
 
   public async getCookies() {
