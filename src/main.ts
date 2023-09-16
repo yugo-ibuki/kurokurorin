@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer'
 import type { Target } from './libs/login.ts'
 import { login } from './libs/login.ts'
-import { data } from './fixtures/login'
+import { data } from './fixtures/loginData'
 
 const loginData: Target[] = data
 
