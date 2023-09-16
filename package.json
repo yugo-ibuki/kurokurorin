@@ -9,7 +9,6 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "tsx src/main.ts",
-    "bun-dev": "bun src/main.ts",
     "build": "bun build"
   },
   "dependencies": {
