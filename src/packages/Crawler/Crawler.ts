@@ -1,8 +1,10 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
+import { passiveCrawl } from './passiveCrawl.ts'
+import type { Options } from '../../libs/getOptions.ts'
 
 interface CrawlerInterface {
-  crawl(): Promise<void>
-  passiveCrawl(): Promise<void>
+  passiveCrawl(options: Options): Promise<string[]>
+  activeCrawl(options: Options): Promise<void>
 }
 
 export class Crawler implements CrawlerInterface {
@@ -12,16 +14,14 @@ export class Crawler implements CrawlerInterface {
     this._page = page
   }
 
-  public async crawl() {
+  public async passiveCrawl(options: Options): Promise<string[]> {
+    await this._page.goto('https://security-crawl-maze.app/')
+    return await passiveCrawl(this._page, [], options)
+  }
+
+  public async activeCrawl(options: Options) {
     console.log(this._page)
-    console.log('crawl')
-  }
-
-  public async passiveCrawl() {
-    console.log('passive crawl')
-  }
-
-  public activeCrawl() {
+    console.log(options)
     console.log('active crawl')
   }
 }

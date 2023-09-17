@@ -1,5 +1,9 @@
-type Options = {
-  isPassiveCrawl: boolean
+export type Options = {
+  startTime: number
+  userOptions: {
+    crawlingTime: number
+    isPassiveCrawl: boolean
+  }
 }
 
 /**
@@ -8,6 +12,10 @@ type Options = {
  */
 export const getOptions = (): Options => {
   return {
-    isPassiveCrawl: true
+    startTime: Date.now(),
+    userOptions: {
+      crawlingTime: 60,
+      isPassiveCrawl: true
+    }
   }
 }

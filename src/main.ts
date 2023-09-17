@@ -1,9 +1,9 @@
-import type { Target } from './libs/login.ts'
-import { data } from './fixtures/loginData'
+// import type { Target } from './libs/login.ts'
+// import { data } from './fixtures/loginData'
 import { Browser } from './packages/Browser'
 import { getOptions } from './libs/getOptions.ts'
 
-const loginData: Target[] = data
+// const loginData: Target[] = data
 
 const main = async () => {
   const options = getOptions()
@@ -22,7 +22,9 @@ const main = async () => {
   const cookies = await page.getCookies()
   console.log(cookies)
 
-  await page.crawler.crawl()
+  if (options.userOptions.isPassiveCrawl) {
+    await page.crawler.passiveCrawl(options)
+  }
 
   await page.close()
   await browser.close()

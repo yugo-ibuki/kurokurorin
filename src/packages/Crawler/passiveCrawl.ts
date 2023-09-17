@@ -1,4 +1,5 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
+import type { Options } from '../../libs/getOptions.ts'
 
 const allowedDomain = 'security-crawl-maze.app'
 
@@ -6,14 +7,20 @@ const allowedDomain = 'security-crawl-maze.app'
  * a タグのみを収集し、再帰的にクローリングしていく。
  * @param page - puppeteer の page オブジェクト
  * @param visitedUrls - 既に訪れた URL の配列
+ * @param options - クローリングに必要なオプション
+ * @param no - 何番目の URL か
  * @returns - 重複排除された URL の配列
  */
 export const passiveCrawl = async (
   page: PuppeteerPage,
-  visitedUrls: string[] = []
-) => {
-  console.log('visitedUrls', visitedUrls)
-  if (visitedUrls.length >= 10) {
+  visitedUrls: string[] = [],
+  options: Pick<Options, 'startTime'>,
+  no: number = 0
+): Promise<string[]> => {
+  console.log('passiveCrawl is called times: ', no)
+  // 10秒経過したら終了
+  const isTimeUp = Date.now() - options.startTime >= 10000
+  if (isTimeUp) {
     return visitedUrls
   }
 
@@ -27,12 +34,10 @@ export const passiveCrawl = async (
     ...new Set(visitedUrls.concat(onlyAllowedDomainUrl))
   ]
 
-  for (const url of uniqueVisitedUrls) {
-    await page.goto(url)
-    await passiveCrawl(page, uniqueVisitedUrls)
-  }
+  // 一つずつページに遷移していく
+  await page.goto(uniqueVisitedUrls[no])
 
-  return uniqueVisitedUrls
+  return await passiveCrawl(page, uniqueVisitedUrls, options, no + 1)
 }
 
 /**
