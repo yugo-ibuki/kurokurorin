@@ -3,7 +3,13 @@ import type { Page as PuppeteerPage } from 'puppeteer'
 import type { Target } from '../../libs/login.ts'
 import { login } from '../../libs/login.ts'
 
-export class Page {
+interface PageInterface {
+  login(loginData: Target[]): Promise<boolean>
+  getCookies(): Promise<unknown>
+  close(): Promise<void>
+}
+
+export class Page implements PageInterface {
   private readonly _page: PuppeteerPage
 
   private constructor(page: PuppeteerPage) {

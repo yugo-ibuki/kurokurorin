@@ -3,7 +3,12 @@ import { launch } from 'puppeteer'
 import { BrowserConfig } from '../../config/BrowserConfig.ts'
 import { Page } from '../Page'
 
-export class Browser {
+interface BrowserInterface {
+  createPage(): Promise<Page>
+  close(): Promise<void>
+}
+
+export class Browser implements BrowserInterface {
   private readonly browser: PuppeteerBrowser
 
   private constructor(browser: PuppeteerBrowser) {
