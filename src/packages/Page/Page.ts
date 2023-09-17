@@ -2,6 +2,7 @@ import type { Browser as PuppeteerBrowser } from 'puppeteer'
 import type { Page as PuppeteerPage } from 'puppeteer'
 import type { Target } from '../../libs/login.ts'
 import { login } from '../../libs/login.ts'
+import { Crawler } from '../Crawler/Crawler.ts'
 
 interface PageInterface {
   login(loginData: Target[]): Promise<boolean>
@@ -11,9 +12,11 @@ interface PageInterface {
 
 export class Page implements PageInterface {
   private readonly _page: PuppeteerPage
+  private readonly _crawler: Crawler
 
   private constructor(page: PuppeteerPage) {
     this._page = page
+    this._crawler = new Crawler(this._page)
   }
 
   static async createPage(browser: PuppeteerBrowser): Promise<Page> {
@@ -36,5 +39,12 @@ export class Page implements PageInterface {
 
   public async close() {
     await this._page.close()
+  }
+
+  /**
+   * Crawlerを行う際のgetter
+   */
+  get crawler() {
+    return this._crawler
   }
 }
