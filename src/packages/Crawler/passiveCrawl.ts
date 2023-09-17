@@ -18,6 +18,7 @@ export const passiveCrawl = async (
   no: number = 0
 ): Promise<string[]> => {
   console.log('passiveCrawl is called times: ', no)
+
   // 10秒経過したら終了
   const isTimeUp = Date.now() - options.startTime >= 10000
   if (isTimeUp) {
@@ -43,6 +44,7 @@ export const passiveCrawl = async (
 /**
  * ページ内の a タグを収集する
  * @param page
+ * @returns a タグの href 属性にある URL の配列
  */
 const scrapeATag = async (page: PuppeteerPage): Promise<string[]> => {
   return await page.$$eval('a', (elements) =>
