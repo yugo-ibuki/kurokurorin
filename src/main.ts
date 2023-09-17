@@ -11,19 +11,20 @@ const main = async () => {
   const browser = await Browser.create()
   const page = await browser.createPage()
 
-  const isLoggedIn = await page.login(loginData)
-  if (!isLoggedIn) {
-    console.log('ログインに失敗しました')
-    await page.close()
-    await browser.close()
-    return
-  }
+  // const isLoggedIn = await page.login(loginData)
+  // if (!isLoggedIn) {
+  //   console.log('ログインに失敗しました')
+  //   await page.close()
+  //   await browser.close()
+  //   return
+  // }
 
   const cookies = await page.getCookies()
-  console.log(cookies)
+  console.log('cookies: ', cookies)
 
   if (options.userOptions.isPassiveCrawl) {
-    await page.crawler.passiveCrawl(options)
+    const passiveResult = await page.crawler.passiveCrawl(options)
+    console.log(passiveResult)
   }
 
   await page.close()
