@@ -1,4 +1,4 @@
 export const BrowserConfig = {
-  headless: false,
+  headless: 'new',
   args: ['--no-sandbox', '--disable-setuid-sandbox', '--incognito']
 }
