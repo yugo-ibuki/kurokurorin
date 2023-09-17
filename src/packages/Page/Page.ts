@@ -19,11 +19,19 @@ export class Page implements PageInterface {
     this._crawler = new Crawler(this._page)
   }
 
+  /**
+   * Pageを作成する
+   * @param browser
+   */
   static async createPage(browser: PuppeteerBrowser): Promise<Page> {
     const page = await browser.newPage()
     return new Page(page)
   }
 
+  /**
+   * ログインを行う
+   * @param loginData
+   */
   public async login(loginData: Target[]) {
     try {
       return await login(this._page, loginData)
@@ -33,10 +41,16 @@ export class Page implements PageInterface {
     }
   }
 
+  /**
+   * Cookieを取得する
+   */
   public async getCookies() {
     return await this._page.cookies()
   }
 
+  /**
+   * ページを閉じる
+   */
   public async close() {
     await this._page.close()
   }
