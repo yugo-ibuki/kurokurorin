@@ -18,6 +18,9 @@ const main = async () => {
 
   const cookies = await page.getCookies()
   console.log(cookies)
+
+  // クローリングをここで行う
+
   await page.close()
   await browser.close()
 }

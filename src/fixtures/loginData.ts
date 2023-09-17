@@ -1,5 +1,6 @@
 import type { Target } from '../libs/login.ts'
 
+// サービスに合わせて変更する
 export const data: Target[] = [
   {
     elementData: {
@@ -8,7 +9,7 @@ export const data: Target[] = [
     },
     actionData: {
       type: 'type',
-      value: 'username'
+      value: process.env.login_id
     }
   },
   {
@@ -18,7 +19,7 @@ export const data: Target[] = [
     },
     actionData: {
       type: 'type',
-      value: 'password'
+      value: process.env.login_password
     }
   },
   {
