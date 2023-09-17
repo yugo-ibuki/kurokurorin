@@ -15,15 +15,24 @@ export class Browser implements BrowserInterface {
     this.browser = browser
   }
 
+  /**
+   * Browserを作成する
+   */
   static async create() {
     const browser = await launch(BrowserConfig)
     return new Browser(browser)
   }
 
+  /**
+   * Pageを作成する
+   */
   public async createPage(): Promise<Page> {
     return await Page.createPage(this.browser)
   }
 
+  /**
+   * Browserを閉じる
+   */
   public async close() {
     await this.browser.close()
   }
