@@ -20,7 +20,6 @@ const main = async () => {
   console.log(cookies)
 
   await page.crawler.crawl()
-  // クローリングをここで行う
 
   await page.close()
   await browser.close()
