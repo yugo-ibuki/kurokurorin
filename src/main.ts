@@ -1,10 +1,13 @@
 import type { Target } from './libs/login.ts'
 import { data } from './fixtures/loginData'
 import { Browser } from './packages/Browser'
+import { getOptions } from './libs/getOptions.ts'
 
 const loginData: Target[] = data
 
 const main = async () => {
+  const options = getOptions()
+
   const browser = await Browser.create()
   const page = await browser.createPage()
 
