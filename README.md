@@ -1,10 +1,14 @@
-# 概要
+# Lang
+[ja]('./README.ja.md')
 
-クローリングを主としたリポジトリ。
+# Overview
 
-クロクロとクローリングしていきます。<br />
-ペットのように扱ってください。
+This code is for crawling the websites.
 
-## クロール対象参考
+Crawling sounds like KuroKuro...
+just like that way...<br />
+Please treat it as a crawling pet like a Rumba, vacuuming machine.
+
+## crawl test site
 
 security crawl maze
