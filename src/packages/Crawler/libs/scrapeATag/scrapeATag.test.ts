@@ -29,6 +29,5 @@ describe('scrapeATag test', function () {
       'https://example.com/2',
       'https://example2.com/1'
     ])
-    expect(1).toBe(1)
   })
 })
