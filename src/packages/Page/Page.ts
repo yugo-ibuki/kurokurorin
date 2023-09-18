@@ -34,6 +34,7 @@ export class Page implements PageInterface {
    */
   public async login(loginData: Target[]) {
     try {
+      console.log('login start')
       return await login(this.#page, loginData)
     } catch (e) {
       console.error(e)

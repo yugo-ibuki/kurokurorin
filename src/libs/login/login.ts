@@ -47,6 +47,7 @@ export const login = async (
       break
     }
 
+    console.log('actions: ', target.actionData)
     await action(target.actionData, element)
   }
 
