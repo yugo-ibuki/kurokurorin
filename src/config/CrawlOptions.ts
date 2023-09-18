@@ -29,9 +29,11 @@ export const CrawlOptions = (): CrawlOptionsType => {
     userOptions: {
       crawlingTime: 60, // 1 minute
       isPassiveCrawl: true,
-      crawlStartUrl: 'https://security-crawl-maze.app/',
-      allowedDomain: 'security-crawl-maze.app',
-      hasLoginProcess: false
+      // crawlStartUrl: 'https://security-crawl-maze.app/',
+      crawlStartUrl: 'http://localhost:3333',
+      // allowedDomain: 'security-crawl-maze.app',
+      allowedDomain: 'localhost',
+      hasLoginProcess: true
     }
   }
 }

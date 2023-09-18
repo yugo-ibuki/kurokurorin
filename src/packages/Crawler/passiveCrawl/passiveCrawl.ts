@@ -24,6 +24,7 @@ export const passiveCrawl = async (
   options: PassiveCrawlOptions,
   no: number = 0
 ): Promise<string[]> => {
+  console.log(page.url())
   console.log('passiveCrawl is called times: ', no)
 
   const { startTime } = options
@@ -35,6 +36,7 @@ export const passiveCrawl = async (
     return visitedUrls
   }
 
+  console.log('will scrape a tag')
   const urls = await scrapeATag(page)
 
   // ドメイン制限
@@ -45,8 +47,11 @@ export const passiveCrawl = async (
     ...new Set(visitedUrls.concat(onlyAllowedDomainUrl))
   ]
 
+  console.log('will go to next page: ', uniqueVisitedUrls[no])
   // 一つずつページに遷移していく
-  await page.goto(uniqueVisitedUrls[no])
+  await page.goto(uniqueVisitedUrls[no], {
+    waitUntil: 'load'
+  })
 
   return await passiveCrawl(page, uniqueVisitedUrls, options, no + 1)
 }
