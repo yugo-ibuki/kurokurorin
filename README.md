@@ -1,5 +1,5 @@
 # Lang
-[ja](./README.ja.md)
+[ja](/README.ja.md)
 
 # Overview
 
