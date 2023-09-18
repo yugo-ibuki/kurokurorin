@@ -1,1 +1,1 @@
-export * from './activeCrawl.ts'
+export * from './activeCrawl'

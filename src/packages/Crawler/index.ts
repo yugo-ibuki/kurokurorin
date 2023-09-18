@@ -1,1 +1,1 @@
-export * from './Crawler.ts'
+export * from './Crawler'

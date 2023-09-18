@@ -1,1 +1,1 @@
-export * from './onlyAllowedDomain.ts'
+export * from './onlyAllowedDomain'

@@ -1,1 +1,1 @@
-export * from './Browser.ts'
+export * from './Browser'

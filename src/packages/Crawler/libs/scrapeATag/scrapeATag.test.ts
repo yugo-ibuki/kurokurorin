@@ -1,4 +1,4 @@
-import { fixtures } from './fixtures.ts'
+import { fixtures } from './fixtures'
 import { scrapeATag } from './scrapeATag'
 import { afterAll, beforeAll, expect } from 'vitest'
 import type { Page, Browser } from 'puppeteer'

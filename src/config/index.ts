@@ -1,2 +1,2 @@
-export * from './BrowserConfig.ts'
-export * from './CrawlOptions.ts'
+export * from './BrowserConfig'
+export * from './CrawlOptions'

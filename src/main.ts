@@ -1,9 +1,7 @@
 // import type { Target } from '@libs/login'
 // import { data } from './fixtures/loginData'
-// import { Browser } from '@packages/Browser'
-import { Browser } from './packages/Browser'
-import { CrawlOptions } from './config/CrawlOptions'
-// import { CrawlOptions } from '@config/CrawlOptions'
+import { Browser } from '@packages/Browser'
+import { CrawlOptions } from '@config/CrawlOptions'
 
 // const loginData: Target[] = data
 

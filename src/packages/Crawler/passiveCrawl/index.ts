@@ -1,1 +1,1 @@
-export * from './passiveCrawl.ts'
+export * from './passiveCrawl'

@@ -1,4 +1,4 @@
-import { onlyAllowedDomain } from './onlyAllowedDomain.ts'
+import { onlyAllowedDomain } from './onlyAllowedDomain'
 import { expect } from 'vitest'
 
 describe('onlyAllowedDomain', () => {
