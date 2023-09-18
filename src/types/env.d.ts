@@ -2,8 +2,8 @@ declare module 'process' {
   global {
     namespace NodeJS {
       interface ProcessEnv {
-        login_id: string
-        login_password: string
+        readonly login_id: string
+        readonly login_password: string
       }
     }
   }
