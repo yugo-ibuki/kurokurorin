@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "tsx src/main.ts",
     "build": "tsc src/main.ts --outDir dist",
-    "build:bun": "bun build"
+    "build:bun": "bun build",
+    "test": "vitest ./"
   },
   "dependencies": {
     "crawlee": "^3.5.4",
@@ -21,9 +22,10 @@
     "@typescript-eslint/parser": "^6.7.0",
     "eslint": "8.49.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "jest": "^29.7.0",
     "prettier": "^3.0.3",
     "tsx": "^3.12.10",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.4"
   }
 }

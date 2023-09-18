@@ -21,6 +21,8 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
+        /* for vitest */
+        "types": ["vitest/globals"],
         "paths": {
             "@packages/*": ["packages/*"],
             "@config/*": ["config/*"],
