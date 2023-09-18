@@ -39,7 +39,7 @@ export const passiveCrawl = async (
     options.userOptions.allowedDomain
   )
 
-  // 重複排除
+  // マージして重複排除
   const uniqueVisitedUrls = [
     ...new Set(visitedUrls.concat(onlyAllowedDomainUrl))
   ]
