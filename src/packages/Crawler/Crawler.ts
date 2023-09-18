@@ -1,6 +1,7 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
 import { passiveCrawl } from './passiveCrawl'
 import type { Options } from '@libs/getOptions'
+import { activeCrawl } from 'packages/Crawler/activeCrawl'
 
 interface CrawlerInterface {
   passiveCrawl(options: Options): Promise<string[]>
@@ -20,8 +21,8 @@ export class Crawler implements CrawlerInterface {
   }
 
   public async activeCrawl(options: Options) {
-    console.log(this._page)
-    console.log(options)
-    console.log('active crawl')
+    const activeCrawlResult = await activeCrawl(options)
+    console.log(activeCrawlResult)
+    console.log('active crawl done')
   }
 }
