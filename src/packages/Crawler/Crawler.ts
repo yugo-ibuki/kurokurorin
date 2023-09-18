@@ -9,15 +9,15 @@ interface CrawlerInterface {
 }
 
 export class Crawler implements CrawlerInterface {
-  private readonly _page: PuppeteerPage
+  readonly #page: PuppeteerPage
 
   constructor(page: PuppeteerPage) {
-    this._page = page
+    this.#page = page
   }
 
   public async passiveCrawl(options: CrawlOptionsType): Promise<string[]> {
-    await this._page.goto(options.userOptions.crawlStartUrl)
-    return await passiveCrawl(this._page, [], options)
+    await this.#page.goto(options.userOptions.crawlStartUrl)
+    return await passiveCrawl(this.#page, [], options)
   }
 
   public async activeCrawl(options: CrawlOptionsType) {

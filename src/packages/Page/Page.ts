@@ -11,12 +11,12 @@ interface PageInterface {
 }
 
 export class Page implements PageInterface {
-  private readonly _page: PuppeteerPage
-  private readonly _crawler: Crawler
+  readonly #page: PuppeteerPage
+  readonly #crawler: Crawler
 
   private constructor(page: PuppeteerPage) {
-    this._page = page
-    this._crawler = new Crawler(this._page)
+    this.#page = page
+    this.#crawler = new Crawler(this.#page)
   }
 
   /**
@@ -34,7 +34,7 @@ export class Page implements PageInterface {
    */
   public async login(loginData: Target[]) {
     try {
-      return await login(this._page, loginData)
+      return await login(this.#page, loginData)
     } catch (e) {
       console.error(e)
       return false
@@ -45,20 +45,20 @@ export class Page implements PageInterface {
    * Cookieを取得する
    */
   public async getCookies() {
-    return await this._page.cookies()
+    return await this.#page.cookies()
   }
 
   /**
    * ページを閉じる
    */
   public async close() {
-    await this._page.close()
+    await this.#page.close()
   }
 
   /**
    * Crawlerを行う際のgetter
    */
   get crawler() {
-    return this._crawler
+    return this.#crawler
   }
 }

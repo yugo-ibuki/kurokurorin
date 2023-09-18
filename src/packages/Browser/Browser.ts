@@ -9,10 +9,10 @@ interface BrowserInterface {
 }
 
 export class Browser implements BrowserInterface {
-  private readonly browser: PuppeteerBrowser
+  readonly #browser: PuppeteerBrowser
 
   private constructor(browser: PuppeteerBrowser) {
-    this.browser = browser
+    this.#browser = browser
   }
 
   /**
@@ -27,13 +27,13 @@ export class Browser implements BrowserInterface {
    * Pageを作成する
    */
   public async createPage(): Promise<Page> {
-    return await Page.createPage(this.browser)
+    return await Page.createPage(this.#browser)
   }
 
   /**
    * Browserを閉じる
    */
   public async close() {
-    await this.browser.close()
+    await this.#browser.close()
   }
 }
