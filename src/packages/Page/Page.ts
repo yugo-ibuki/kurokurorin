@@ -1,8 +1,8 @@
 import type { Browser as PuppeteerBrowser } from 'puppeteer'
 import type { Page as PuppeteerPage } from 'puppeteer'
-import type { Target } from '../../libs/login.ts'
-import { login } from '../../libs/login.ts'
-import { Crawler } from '../Crawler/Crawler.ts'
+import type { Target } from '@libs/login'
+import { login } from '@libs/login'
+import { Crawler } from '@packages/Crawler'
 
 interface PageInterface {
   login(loginData: Target[]): Promise<boolean>

@@ -1,6 +1,6 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
-import { passiveCrawl } from './passiveCrawl.ts'
-import type { Options } from '../../libs/getOptions.ts'
+import { passiveCrawl } from './libs/passiveCrawl'
+import type { Options } from '@libs/getOptions'
 
 interface CrawlerInterface {
   passiveCrawl(options: Options): Promise<string[]>

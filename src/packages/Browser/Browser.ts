@@ -1,7 +1,7 @@
 import type { Browser as PuppeteerBrowser } from 'puppeteer'
 import { launch } from 'puppeteer'
-import { BrowserConfig } from '../../config/BrowserConfig.ts'
-import { Page } from '../Page'
+import { BrowserConfig } from '@config/BrowserConfig.ts'
+import { Page } from '@packages/Page'
 
 interface BrowserInterface {
   createPage(): Promise<Page>

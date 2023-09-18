@@ -1,5 +1,6 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
-import type { Options } from '../../libs/getOptions.ts'
+import type { Options } from '@libs/getOptions'
+import { scrapeATag } from '../scrapeATag'
 
 const allowedDomain = 'security-crawl-maze.app'
 
@@ -39,17 +40,6 @@ export const passiveCrawl = async (
   await page.goto(uniqueVisitedUrls[no])
 
   return await passiveCrawl(page, uniqueVisitedUrls, options, no + 1)
-}
-
-/**
- * ページ内の a タグを収集する
- * @param page
- * @returns a タグの href 属性にある URL の配列
- */
-const scrapeATag = async (page: PuppeteerPage): Promise<string[]> => {
-  return await page.$$eval('a', (elements) =>
-    elements.map((element) => element.href)
-  )
 }
 
 /**
