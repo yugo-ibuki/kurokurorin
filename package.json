@@ -9,7 +9,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "tsx src/main.ts",
-    "build": "bun build"
+    "build": "tsc src/main.ts --outDir dist",
+    "build:bun": "bun build"
   },
   "dependencies": {
     "crawlee": "^3.5.4",
