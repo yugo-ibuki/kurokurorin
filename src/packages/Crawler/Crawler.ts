@@ -1,5 +1,5 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
-import { passiveCrawl } from './libs/passiveCrawl'
+import { passiveCrawl } from './passiveCrawl'
 import type { Options } from '@libs/getOptions'
 
 interface CrawlerInterface {
