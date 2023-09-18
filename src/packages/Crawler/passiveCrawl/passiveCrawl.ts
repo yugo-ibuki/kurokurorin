@@ -3,7 +3,7 @@ import { scrapeATag } from '../libs/scrapeATag'
 import { onlyAllowedDomain } from '../libs/onlyAllowedDomein'
 
 type PassiveCrawlOptions = {
-  startTime: number
+  startTime: Date
   userOptions: {
     allowedDomain: string
   }
@@ -26,7 +26,7 @@ export const passiveCrawl = async (
   console.log('passiveCrawl is called times: ', no)
 
   // 10秒経過したら終了
-  const isTimeUp = Date.now() - options.startTime >= 10000
+  const isTimeUp = Date.now() - options.startTime.getTime() >= 10000
   if (isTimeUp) {
     return visitedUrls
   }
