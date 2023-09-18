@@ -4,15 +4,19 @@ import { Browser } from '@packages/Browser'
 import { CrawlOptions } from '@config/CrawlOptions'
 import { writeJsonToFile } from '@utils/writeJsonToFile'
 import { differenceInSeconds } from 'date-fns'
+import type { Protocol } from 'puppeteer'
 
+// NOTE: ここでログイン情報を取得する。現在はダミー
 const loginData: Target[] = data
 
 type CrawlResult = {
   urls: string[]
+  cookies: Protocol.Network.Cookie[]
 }
 
 const crawlResultDefault: CrawlResult = {
-  urls: []
+  urls: [],
+  cookies: []
 }
 
 const main = async () => {
@@ -31,10 +35,9 @@ const main = async () => {
     }
   }
 
-  const cookies = await page.getCookies()
-  console.log('cookies: ', cookies)
-
   const crawlResult: CrawlResult = crawlResultDefault
+
+  crawlResult.cookies = await page.getCookies()
 
   // クローリングを開始
   options.userOptions.isPassiveCrawl
