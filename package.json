@@ -9,7 +9,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "tsx src/main.ts",
-    "build": "tsc src/main.ts --outDir dist",
+    "build": "tsc -p tsconfig.json",
     "build:bun": "bun build",
     "test": "vitest ./"
   },
