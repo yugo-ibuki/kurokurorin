@@ -46,6 +46,17 @@ const main = async () => {
 
   await page.close()
   await browser.close()
+
+  console.log('crawlResult: ', crawlResult)
+
+  // 結果を出力
+  await writeJsonToFile(
+    crawlResult,
+    './results',
+    `crawlResult-${Date.now()}.json`
+  )
+
+  console.log(`Done in ${differenceInSeconds(new Date(), options.startTime)} s`)
 }
 
 main()

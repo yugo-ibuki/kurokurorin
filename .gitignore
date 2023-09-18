@@ -3,6 +3,8 @@ dist
 .cache
 .env
 
+/results
+
 # dependencies
 /node_modules
 /.pnp

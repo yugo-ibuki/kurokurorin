@@ -3,7 +3,7 @@
  */
 export type CrawlOptionsType = {
   /** クローリングを開始した時刻 */
-  startTime: number
+  startTime: Date
   /** ユーザーが指定するオプション */
   userOptions: {
     /** クローリングを行う時間 */
@@ -25,7 +25,7 @@ export type CrawlOptionsType = {
  */
 export const CrawlOptions = (): CrawlOptionsType => {
   return {
-    startTime: Date.now(),
+    startTime: new Date(),
     userOptions: {
       crawlingTime: 60,
       isPassiveCrawl: true,
