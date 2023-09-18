@@ -1,7 +1,14 @@
+/**
+ * クローリングに必要なオプション
+ */
 export type Options = {
+  /** クローリングを開始した時刻 */
   startTime: number
+  /** ユーザーが指定するオプション */
   userOptions: {
+    /** クローリングを行う時間 */
     crawlingTime: number
+    /** 静的クローリングを行うかどうか: デフォルトをアクティブクローリングにする */
     isPassiveCrawl: boolean
   }
 }
