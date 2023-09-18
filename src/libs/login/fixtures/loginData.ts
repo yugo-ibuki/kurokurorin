@@ -1,4 +1,4 @@
-import type { Target } from '../libs/login/login.ts'
+import type { Target } from '../login.ts'
 
 // サービスに合わせて変更する
 export const data: Target[] = [

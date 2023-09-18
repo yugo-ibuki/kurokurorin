@@ -1,9 +1,13 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
-import type { Options } from '@libs/getOptions'
 import { scrapeATag } from '../libs/scrapeATag'
 import { onlyAllowedDomain } from '../libs/onlyAllowedDomein'
 
-const allowedDomain = 'security-crawl-maze.app'
+type PassiveCrawlOptions = {
+  startTime: number
+  userOptions: {
+    allowedDomain: string
+  }
+}
 
 /**
  * a タグのみを収集し、再帰的にクローリングしていく。
@@ -16,7 +20,7 @@ const allowedDomain = 'security-crawl-maze.app'
 export const passiveCrawl = async (
   page: PuppeteerPage,
   visitedUrls: string[] = [],
-  options: Pick<Options, 'startTime'>,
+  options: PassiveCrawlOptions,
   no: number = 0
 ): Promise<string[]> => {
   console.log('passiveCrawl is called times: ', no)
@@ -30,7 +34,10 @@ export const passiveCrawl = async (
   const urls = await scrapeATag(page)
 
   // ドメイン制限
-  const onlyAllowedDomainUrl = await onlyAllowedDomain(urls, allowedDomain)
+  const onlyAllowedDomainUrl = await onlyAllowedDomain(
+    urls,
+    options.userOptions.allowedDomain
+  )
 
   // 重複排除
   const uniqueVisitedUrls = [

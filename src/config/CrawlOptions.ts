@@ -1,7 +1,7 @@
 /**
  * クローリングに必要なオプション
  */
-export type Options = {
+export type CrawlOptionsType = {
   /** クローリングを開始した時刻 */
   startTime: number
   /** ユーザーが指定するオプション */
@@ -10,6 +10,10 @@ export type Options = {
     crawlingTime: number
     /** 静的クローリングを行うかどうか: デフォルトをアクティブクローリングにする */
     isPassiveCrawl: boolean
+    /** クローリングを開始する URL */
+    crawlStartUrl: string
+    /** 許可するドメイン */
+    allowedDomain: string
   }
 }
 
@@ -17,12 +21,14 @@ export type Options = {
  * オプションを取得する
  * @returns クローリングに必要なオプション
  */
-export const getOptions = (): Options => {
+export const CrawlOptions = (): CrawlOptionsType => {
   return {
     startTime: Date.now(),
     userOptions: {
       crawlingTime: 60,
-      isPassiveCrawl: true
+      isPassiveCrawl: true,
+      crawlStartUrl: 'https://security-crawl-maze.app/',
+      allowedDomain: 'security-crawl-maze.app'
     }
   }
 }

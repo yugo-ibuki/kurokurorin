@@ -1,12 +1,12 @@
 // import type { Target } from '@libs/login'
 // import { data } from './fixtures/loginData'
 import { Browser } from '@packages/Browser'
-import { getOptions } from '@libs/getOptions'
+import { CrawlOptions } from '@config/CrawlOptions'
 
 // const loginData: Target[] = data
 
 const main = async () => {
-  const options = getOptions()
+  const options = CrawlOptions()
 
   const browser = await Browser.create()
   const page = await browser.createPage()
@@ -25,6 +25,9 @@ const main = async () => {
   if (options.userOptions.isPassiveCrawl) {
     const passiveResult = await page.crawler.passiveCrawl(options)
     console.log(passiveResult)
+  } else {
+    const activeResult = await page.crawler.activeCrawl(options)
+    console.log(activeResult)
   }
 
   await page.close()

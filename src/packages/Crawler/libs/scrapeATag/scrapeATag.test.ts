@@ -1,9 +1,9 @@
 import { fixtures } from './fixtures.ts'
-import { scrapeATag } from './scrapeATag.ts'
+import { scrapeATag } from './scrapeATag'
 import { afterAll, beforeAll, expect } from 'vitest'
 import type { Page, Browser } from 'puppeteer'
 import { launch } from 'puppeteer'
-import { BrowserConfig } from '@config/BrowserConfig.ts'
+import { BrowserConfig } from '@config/BrowserConfig'
 
 describe('scrapeATag test', function () {
   let browser: Browser

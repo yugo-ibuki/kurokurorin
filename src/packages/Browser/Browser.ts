@@ -1,6 +1,6 @@
 import type { Browser as PuppeteerBrowser } from 'puppeteer'
 import { launch } from 'puppeteer'
-import { BrowserConfig } from '@config/BrowserConfig.ts'
+import { BrowserConfig } from '@config/BrowserConfig'
 import { Page } from '@packages/Page'
 
 interface BrowserInterface {
@@ -16,7 +16,7 @@ export class Browser implements BrowserInterface {
   }
 
   /**
-   * Browserを作成する
+   * Browserを作成するファクトリーメソッド
    */
   static async create() {
     const browser = await launch(BrowserConfig)

@@ -1,6 +1,6 @@
-import type { Options } from '@libs/getOptions'
+import type { CrawlOptionsType } from '@config/CrawlOptions'
 
-export const activeCrawl = async (options: Options) => {
+export const activeCrawl = async (options: CrawlOptionsType) => {
   console.log(options)
   console.log('here is activeCrawl')
 }
