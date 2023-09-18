@@ -27,7 +27,7 @@ export const CrawlOptions = (): CrawlOptionsType => {
   return {
     startTime: new Date(),
     userOptions: {
-      crawlingTime: 60,
+      crawlingTime: 60, // 1 minute
       isPassiveCrawl: true,
       crawlStartUrl: 'https://security-crawl-maze.app/',
       allowedDomain: 'security-crawl-maze.app',

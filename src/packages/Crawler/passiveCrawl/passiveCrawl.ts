@@ -5,6 +5,7 @@ import { onlyAllowedDomain } from '../libs/onlyAllowedDomein'
 type PassiveCrawlOptions = {
   startTime: Date
   userOptions: {
+    crawlingTime: number
     allowedDomain: string
   }
 }
@@ -25,8 +26,11 @@ export const passiveCrawl = async (
 ): Promise<string[]> => {
   console.log('passiveCrawl is called times: ', no)
 
-  // 10秒経過したら終了
-  const isTimeUp = Date.now() - options.startTime.getTime() >= 10000
+  const { startTime } = options
+  const { crawlingTime, allowedDomain } = options.userOptions
+
+  // クローリング指定時間を経過したら終了
+  const isTimeUp = Date.now() - startTime.getTime() >= crawlingTime * 1000
   if (isTimeUp) {
     return visitedUrls
   }
@@ -34,10 +38,7 @@ export const passiveCrawl = async (
   const urls = await scrapeATag(page)
 
   // ドメイン制限
-  const onlyAllowedDomainUrl = await onlyAllowedDomain(
-    urls,
-    options.userOptions.allowedDomain
-  )
+  const onlyAllowedDomainUrl = await onlyAllowedDomain(urls, allowedDomain)
 
   // マージして重複排除
   const uniqueVisitedUrls = [

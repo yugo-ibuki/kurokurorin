@@ -36,13 +36,9 @@ const main = async () => {
 
   const crawlResult: CrawlResult = crawlResultDefault
 
-  if (options.userOptions.isPassiveCrawl) {
-    const passiveResult = await page.crawler.passiveCrawl(options)
-    crawlResult.urls = passiveResult
-  } else {
-    const activeResult = await page.crawler.activeCrawl(options)
-    crawlResult.urls = activeResult
-  }
+  options.userOptions.isPassiveCrawl
+    ? (crawlResult.urls = await page.crawler.passiveCrawl(options))
+    : (crawlResult.urls = await page.crawler.activeCrawl(options))
 
   await page.close()
   await browser.close()
