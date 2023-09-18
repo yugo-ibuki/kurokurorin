@@ -36,6 +36,7 @@ const main = async () => {
 
   const crawlResult: CrawlResult = crawlResultDefault
 
+  // クローリングを開始
   options.userOptions.isPassiveCrawl
     ? (crawlResult.urls = await page.crawler.passiveCrawl(options))
     : (crawlResult.urls = await page.crawler.activeCrawl(options))
