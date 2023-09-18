@@ -1,7 +1,7 @@
-// import type { Target } from './libs/login'
+// import type { Target } from '@libs/login'
 // import { data } from './fixtures/loginData'
-import { Browser } from './packages/Browser'
-import { getOptions } from './libs/getOptions'
+import { Browser } from '@packages/Browser'
+import { getOptions } from '@libs/getOptions'
 
 // const loginData: Target[] = data
 
