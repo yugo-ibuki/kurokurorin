@@ -9,8 +9,8 @@ export const onlyAllowedDomain = async (
 ): Promise<string[]> => {
   return urls
     .filter((url) => {
-      const origin = new URL(url).origin
-      return origin.includes(allowedDomain) ? url : undefined
+      const host = new URL(url).host
+      return host.includes(allowedDomain) ? url : undefined
     })
     .filter((url) => url) // undefined 排除
 }
