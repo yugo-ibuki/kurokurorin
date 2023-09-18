@@ -20,8 +20,6 @@ describe('scrapeATag test', function () {
   })
 
   test('Expected Behavior', async () => {
-    // const browser = new Browser()
-    // const page = await browser.newPage()
     await page.setContent(fixtures)
     const result = await scrapeATag(page)
     console.log(result)
