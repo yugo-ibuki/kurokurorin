@@ -24,7 +24,9 @@ export const login = async (
   page: Page,
   targets: Target[]
 ): Promise<boolean> => {
-  await page.goto('http://localhost:3333/login')
+  await page.goto('http://localhost:3333/login', {
+    waitUntil: ['load', 'networkidle2']
+  })
 
   let isSucceeded = true
 

@@ -50,7 +50,7 @@ export const passiveCrawl = async (
   console.log('will go to next page: ', uniqueVisitedUrls[no])
   // 一つずつページに遷移していく
   await page.goto(uniqueVisitedUrls[no], {
-    waitUntil: 'load'
+    waitUntil: ['load', 'networkidle2']
   })
 
   return await passiveCrawl(page, uniqueVisitedUrls, options, no + 1)

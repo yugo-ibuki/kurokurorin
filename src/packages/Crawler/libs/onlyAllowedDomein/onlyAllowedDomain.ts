@@ -12,5 +12,5 @@ export const onlyAllowedDomain = async (
       const host = new URL(url).host
       return host.includes(allowedDomain) ? url : undefined
     })
-    .filter((url) => url) // undefined 排除
+    .filter((url) => url) // undefined を除外
 }

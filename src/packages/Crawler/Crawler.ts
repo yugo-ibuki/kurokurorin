@@ -17,7 +17,7 @@ export class Crawler implements CrawlerInterface {
 
   public async passiveCrawl(options: CrawlOptionsType): Promise<string[]> {
     await this.#page.goto(options.userOptions.crawlStartUrl, {
-      waitUntil: ['load', 'domcontentloaded']
+      waitUntil: ['load']
     })
     return await passiveCrawl(this.#page, [], options)
   }
