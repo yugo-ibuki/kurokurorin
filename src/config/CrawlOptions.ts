@@ -14,6 +14,8 @@ export type CrawlOptionsType = {
     crawlStartUrl: string
     /** 許可するドメイン */
     allowedDomain: string
+    /** ログイン処理が必要かどうか */
+    hasLoginProcess: boolean
   }
 }
 
@@ -28,7 +30,8 @@ export const CrawlOptions = (): CrawlOptionsType => {
       crawlingTime: 60,
       isPassiveCrawl: true,
       crawlStartUrl: 'https://security-crawl-maze.app/',
-      allowedDomain: 'security-crawl-maze.app'
+      allowedDomain: 'security-crawl-maze.app',
+      hasLoginProcess: false
     }
   }
 }

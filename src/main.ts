@@ -1,9 +1,9 @@
-// import type { Target } from '@libs/login'
-// import { data } from './fixtures/loginData'
+import type { Target } from '@libs/login'
+import { data } from '@libs/login/fixtures/loginData'
 import { Browser } from '@packages/Browser'
 import { CrawlOptions } from '@config/CrawlOptions'
 
-// const loginData: Target[] = data
+const loginData: Target[] = data
 
 const main = async () => {
   const options = CrawlOptions()
@@ -11,13 +11,15 @@ const main = async () => {
   const browser = await Browser.create()
   const page = await browser.createPage()
 
-  // const isLoggedIn = await page.login(loginData)
-  // if (!isLoggedIn) {
-  //   console.log('ログインに失敗しました')
-  //   await page.close()
-  //   await browser.close()
-  //   return
-  // }
+  if (options.userOptions.hasLoginProcess) {
+    const isLoggedIn = await page.login(loginData)
+    if (!isLoggedIn) {
+      console.log('ログインに失敗しました')
+      await page.close()
+      await browser.close()
+      return
+    }
+  }
 
   const cookies = await page.getCookies()
   console.log('cookies: ', cookies)
