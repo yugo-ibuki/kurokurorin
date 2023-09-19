@@ -1,6 +1,7 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
 import { scrapeATag } from '../libs/scrapeATag'
 import { onlyAllowedDomain } from '../libs/onlyAllowedDomein'
+import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 
 type PassiveCrawlOptions = {
   startTime: Date
@@ -42,9 +43,10 @@ export const passiveCrawl = async (
   const onlyAllowedDomainUrl = await onlyAllowedDomain(urls, allowedDomain)
 
   // マージして重複排除
-  const uniqueVisitedUrls = [
-    ...new Set(visitedUrls.concat(onlyAllowedDomainUrl))
-  ]
+  const uniqueVisitedUrls = concatArraysAndWillBeUnique(
+    urls,
+    onlyAllowedDomainUrl
+  )
 
   console.log('will go to next page: ', uniqueVisitedUrls[no])
   // 一つずつページに遷移していく
