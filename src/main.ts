@@ -21,11 +21,15 @@ const crawlResultDefault: CrawlResult = {
 
 const main = async () => {
   const options = CrawlOptions()
+  const {
+    startTime,
+    userOptions: { hasLoginProcess, isActiveCrawl }
+  } = options
 
   const browser = await Browser.create()
   const page = await browser.createPage()
 
-  if (options.userOptions.hasLoginProcess) {
+  if (hasLoginProcess) {
     const isLoggedIn = await page.login(loginData)
     if (!isLoggedIn) {
       console.log('ログインに失敗しました')
@@ -40,9 +44,10 @@ const main = async () => {
   crawlResult.cookies = await page.getCookies()
 
   // クローリングを開始
-  options.userOptions.isPassiveCrawl
-    ? (crawlResult.urls = await page.crawler.passiveCrawl(options))
-    : (crawlResult.urls = await page.crawler.activeCrawl(options))
+  crawlResult.urls = await page.crawler.passiveCrawl(options)
+  if (isActiveCrawl) {
+    crawlResult.urls = await page.crawler.activeCrawl(options)
+  }
 
   await page.close()
   await browser.close()
@@ -56,7 +61,7 @@ const main = async () => {
     `crawlResult-${Date.now()}.json`
   )
 
-  console.log(`Done in ${differenceInSeconds(new Date(), options.startTime)} s`)
+  console.log(`Done in ${differenceInSeconds(new Date(), startTime)} s`)
 }
 
 main()
