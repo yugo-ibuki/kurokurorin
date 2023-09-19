@@ -41,8 +41,10 @@ const main = async () => {
     }
   }
 
+  // 最終的な結果となるオブジェクト
   const crawlResult: CrawlResult = crawlResultDefault
 
+  // クッキーをセット
   crawlResult.cookies = await page.getCookies()
 
   // クローリングを開始
