@@ -62,4 +62,13 @@ export class Page implements PageInterface {
   get crawler() {
     return this.#crawler
   }
+
+  /**
+   * リクエストを送る時のhookを page にセットする
+   */
+  public async requestHook() {
+    this.#page.on('request', (request) => {
+      console.log(request.url())
+    })
+  }
 }

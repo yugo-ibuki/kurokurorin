@@ -29,6 +29,7 @@ const main = async () => {
 
   const browser = await Browser.create()
   const page = await browser.createPage()
+  await page.requestHook()
 
   if (hasLoginProcess) {
     const isLoggedIn = await page.login(loginData)
