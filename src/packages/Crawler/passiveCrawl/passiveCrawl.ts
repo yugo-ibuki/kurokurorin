@@ -24,7 +24,6 @@ export const passiveCrawl = async (
   options: PassiveCrawlOptions,
   no: number = 0
 ): Promise<string[]> => {
-  console.log(page.url())
   console.log('passiveCrawl is called times: ', no)
 
   const { startTime } = options
