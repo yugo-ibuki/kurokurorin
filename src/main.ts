@@ -40,14 +40,9 @@ const main = async () => {
   crawlResult.cookies = await page.getCookies()
 
   // クローリングを開始
-  crawlResult.urls = await page.crawler.passiveCrawl(options)
-
-  if (options.userOptions.isActiveCrawl) {
-    const activeCrawlResultUrls = await page.crawler.activeCrawl(options)
-    crawlResult.urls = [
-      ...new Set(crawlResult.urls.concat(activeCrawlResultUrls))
-    ]
-  }
+  options.userOptions.isPassiveCrawl
+    ? (crawlResult.urls = await page.crawler.passiveCrawl(options))
+    : (crawlResult.urls = await page.crawler.activeCrawl(options))
 
   await page.close()
   await browser.close()

@@ -8,8 +8,8 @@ export type CrawlOptionsType = {
   userOptions: {
     /** クローリングを行う時間 */
     crawlingTime: number
-    /** 深いクローリングを行うかどうかのフラグ */
-    isActiveCrawl: boolean
+    /** 静的クローリングを行うかどうか: デフォルトをアクティブクローリングにする */
+    isPassiveCrawl: boolean
     /** クローリングを開始する URL */
     crawlStartUrl: string
     /** 許可するドメイン */
@@ -28,7 +28,7 @@ export const CrawlOptions = (): CrawlOptionsType => {
     startTime: new Date(),
     userOptions: {
       crawlingTime: 60, // 1 minute
-      isActiveCrawl: true,
+      isPassiveCrawl: true,
       // crawlStartUrl: 'https://security-crawl-maze.app/',
       crawlStartUrl: 'http://localhost:3333',
       // allowedDomain: 'security-crawl-maze.app',
