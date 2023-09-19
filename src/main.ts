@@ -5,6 +5,7 @@ import { CrawlOptions } from '@config/CrawlOptions'
 import { writeJsonToFile } from '@utils/writeJsonToFile'
 import { differenceInSeconds } from 'date-fns'
 import type { Protocol } from 'puppeteer'
+import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 
 // NOTE: ここでログイン情報を取得する。現在はダミー
 const loginData: Target[] = data
@@ -46,7 +47,11 @@ const main = async () => {
   // クローリングを開始
   crawlResult.urls = await page.crawler.passiveCrawl(options)
   if (isActiveCrawl) {
-    crawlResult.urls = await page.crawler.activeCrawl(options)
+    const activeCrawlUrls = await page.crawler.activeCrawl(options)
+    crawlResult.urls = concatArraysAndWillBeUnique(
+      crawlResult.urls,
+      activeCrawlUrls
+    )
   }
 
   await page.close()
