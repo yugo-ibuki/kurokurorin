@@ -23,7 +23,7 @@ export class Crawler implements CrawlerInterface {
   }
 
   public async activeCrawl(options: CrawlOptionsType) {
-    const activeCrawlResult = await activeCrawl(options)
+    const activeCrawlResult = await activeCrawl(this.#page, [], options)
     console.log(activeCrawlResult)
     console.log('active crawl done')
     return []
