@@ -7,7 +7,8 @@ describe('log', () => {
     return {
       green: vi.fn(),
       yellow: vi.fn(),
-      red: vi.fn()
+      red: vi.fn(),
+      bgGray: vi.fn()
     }
   })
 
@@ -24,5 +25,10 @@ describe('log', () => {
   test('logger error: チョークが呼ばれていること', () => {
     Log.error('error')
     expect(chalk.red).toHaveBeenCalled()
+  })
+
+  test('logger request: チョークが呼ばれていること', () => {
+    Log.request('request')
+    expect(chalk.bgGray).toHaveBeenCalled()
   })
 })

@@ -7,12 +7,14 @@ interface LogInterface {
   info: LogType
   warn: LogType
   error: LogType
+  request: LogType
 }
 
 export const Log: LogInterface = {
   info: (...data) => infoLog(data),
   warn: (...data) => warnLog(data),
-  error: (...data) => errorLog(data)
+  error: (...data) => errorLog(data),
+  request: (...data) => requestLog(data)
 }
 
 const infoLog: LogType = (...data) => {
@@ -25,4 +27,8 @@ const warnLog: LogType = (...data) => {
 
 const errorLog: LogType = (...data) => {
   console.error(chalk.red('E: '), ...data)
+}
+
+const requestLog: LogType = (...data) => {
+  console.log(chalk.bgGray('R: '), ...data)
 }
