@@ -3,11 +3,21 @@ import type { Page as PuppeteerPage } from 'puppeteer'
 import type { Target } from '@libs/login'
 import { login } from '@libs/login'
 import { Crawler } from '@packages/Crawler'
+import { Log } from '@utils/log'
+
+type InitialSetup = {
+  setRequestHook: boolean
+}
+
+const initialSetupDefaultParams: InitialSetup = {
+  setRequestHook: false
+}
 
 interface PageInterface {
   login(loginData: Target[]): Promise<boolean>
   getCookies(): Promise<unknown>
   close(): Promise<void>
+  initialSetup(initialSetupDefaultParams: InitialSetup): Promise<void>
 }
 
 export class Page implements PageInterface {
@@ -64,11 +74,20 @@ export class Page implements PageInterface {
   }
 
   /**
+   * ブラウザに埋め込ませる処理の初期設定
+   */
+  public async initialSetup(params: InitialSetup = initialSetupDefaultParams) {
+    if (params.setRequestHook) {
+      await this.requestHook()
+    }
+  }
+
+  /**
    * リクエストを送る時のhookを page にセットする
    */
-  public async requestHook() {
+  private async requestHook() {
     this.#page.on('request', (request) => {
-      console.log(request.url())
+      Log.request('url: ' + request.url(), 'method: ' + request.method())
     })
   }
 }
