@@ -10,11 +10,17 @@ import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 // NOTE: ここでログイン情報を取得する。現在はダミー
 const loginData: Target[] = data
 
+/**
+ * クローリング結果の型
+ */
 type CrawlResult = {
   urls: string[]
   cookies: Protocol.Network.Cookie[]
 }
 
+/**
+ * クローリング結果を格納するオブジェクトのデフォルト値
+ */
 const crawlResultDefault: CrawlResult = {
   urls: [],
   cookies: []
