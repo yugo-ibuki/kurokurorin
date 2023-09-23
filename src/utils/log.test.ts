@@ -11,10 +11,6 @@ describe('log', () => {
     }
   })
 
-  afterAll(() => {
-    // vi.restoreAllMocks()
-  })
-
   test('logger info: チョークが呼ばれていること', () => {
     Log.info('info')
     expect(chalk.green).toHaveBeenCalled()
