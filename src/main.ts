@@ -30,7 +30,7 @@ const main = async () => {
   const options = CrawlOptions()
   const {
     startTime,
-    userOptions: { hasLoginProcess, isActiveCrawl }
+    userOptions: { hasLoginProcess, isDeepCrawl }
   } = options
 
   const browser = await Browser.create()
@@ -57,7 +57,7 @@ const main = async () => {
 
   // クローリングを開始
   const passiveCrawlResultUrls = await page.crawler.passiveCrawl(options)
-  if (isActiveCrawl) {
+  if (isDeepCrawl) {
     const activeCrawlUrls = await page.crawler.activeCrawl(options)
     crawlResult.urls = concatArraysAndWillBeUnique(
       passiveCrawlResultUrls,
