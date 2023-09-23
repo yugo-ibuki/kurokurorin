@@ -6,7 +6,7 @@ import { deepCrawl } from '@packages/Crawler/libs/deepCrawl'
 type ActiveCrawlOptions = {
   startTime: Date
   userOptions: {
-    crawlingTime: number
+    crawlTerm: number
     allowedDomain: string
   }
 }
@@ -28,10 +28,10 @@ export const activeCrawl = async (
   console.log('activeCrawl is called times: ', no)
 
   const { startTime } = options
-  const { crawlingTime, allowedDomain } = options.userOptions
+  const { crawlTerm, allowedDomain } = options.userOptions
 
   // クローリング指定時間を経過したら終了
-  const isTimeUp = Date.now() - startTime.getTime() >= crawlingTime * 1000
+  const isTimeUp = Date.now() - startTime.getTime() >= crawlTerm * 1000
   if (isTimeUp) {
     return visitedUrls
   }
