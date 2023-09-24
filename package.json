@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "tsx src/main.ts",
-    "command": "tsx src/packages/Command/command.ts",
+    "command:shallow": "tsx src/packages/Command/shallow.ts crawl shallow http://localhost:3333",
     "build": "tsc -p tsconfig.json",
     "build:bun": "bun build",
     "test": "vitest"
