@@ -1,12 +1,15 @@
 {
-  "name": "",
+  "name": "kurokurorin",
   "version": "0.0.1",
   "private": true,
   "description": "",
-  "main": "",
+  "main": "src/main.ts",
   "keywords": [],
   "author": "y.ibuki91@gmail.com",
   "license": "UNLICENSED",
+  "bin": {
+    "crawl": "src/packages/Command"
+  },
   "scripts": {
     "dev": "tsx src/main.ts",
     "command": "tsx src/packages/Command/command.ts",
