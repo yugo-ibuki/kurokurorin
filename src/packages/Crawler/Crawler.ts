@@ -5,7 +5,7 @@ import { deepCrawl } from 'packages/Crawler/deepCrawl'
 
 interface CrawlerInterface {
   shallowCrawl(options: CrawlOptionsType): Promise<string[]>
-  activeCrawl(options: CrawlOptionsType): Promise<string[]>
+  deepCrawl(options: CrawlOptionsType): Promise<string[]>
 }
 
 export class Crawler implements CrawlerInterface {
@@ -22,7 +22,7 @@ export class Crawler implements CrawlerInterface {
     return await shallowCrawl(this.#page, [], options)
   }
 
-  public async activeCrawl(options: CrawlOptionsType) {
+  public async deepCrawl(options: CrawlOptionsType) {
     const activeCrawlResult = await deepCrawl(this.#page, [], options)
     console.log(activeCrawlResult)
     console.log('active crawl done')
