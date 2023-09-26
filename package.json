@@ -11,8 +11,8 @@
     "crawl": "src/packages/Command"
   },
   "scripts": {
-    "dev": "tsx src/main.ts",
-    "command:shallow": "tsx src/packages/Command/shallow.ts crawl shallow http://localhost:3333",
+    "crawl:shallow": "tsx src/main.ts shallow http://localhost:3333",
+    "crawl:deep": "tsx src/main.ts deep http://localhost:3333",
     "build": "tsc -p tsconfig.json",
     "build:bun": "bun build",
     "test": "vitest"

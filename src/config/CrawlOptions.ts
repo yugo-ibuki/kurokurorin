@@ -1,3 +1,5 @@
+import { getCommandOptions } from '@packages/Command/crawl'
+
 /**
  * クローリングに必要なオプション
  */
@@ -16,6 +18,8 @@ export type CrawlOptionsType = {
     allowedDomain: string
     /** ログイン処理が必要かどうか */
     hasLoginProcess: boolean
+    /** ログイン情報を記述したJSON */
+    loginJson: object
   }
 }
 
@@ -24,16 +28,9 @@ export type CrawlOptionsType = {
  * @returns クローリングに必要なオプション
  */
 export const CrawlOptions = (): CrawlOptionsType => {
+  const commandOptions = getCommandOptions()
   return {
     startTime: new Date(),
-    userOptions: {
-      crawlTerm: 60, // 1 minute
-      isDeepCrawl: true,
-      // crawlStartUrl: 'https://security-crawl-maze.app/',
-      crawlStartUrl: 'http://localhost:3333',
-      // allowedDomain: 'security-crawl-maze.app',
-      allowedDomain: 'localhost',
-      hasLoginProcess: true
-    }
+    userOptions: commandOptions
   }
 }
