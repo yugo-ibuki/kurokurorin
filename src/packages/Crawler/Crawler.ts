@@ -1,10 +1,10 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
-import { passiveCrawl } from './passiveCrawl'
+import { shallowCrawl } from './shallowCrawl'
 import type { CrawlOptionsType } from '@config/CrawlOptions'
-import { activeCrawl } from 'packages/Crawler/activeCrawl'
+import { deepCrawl } from 'packages/Crawler/deepCrawl'
 
 interface CrawlerInterface {
-  passiveCrawl(options: CrawlOptionsType): Promise<string[]>
+  shallowCrawl(options: CrawlOptionsType): Promise<string[]>
   activeCrawl(options: CrawlOptionsType): Promise<string[]>
 }
 
@@ -15,15 +15,15 @@ export class Crawler implements CrawlerInterface {
     this.#page = page
   }
 
-  public async passiveCrawl(options: CrawlOptionsType): Promise<string[]> {
+  public async shallowCrawl(options: CrawlOptionsType): Promise<string[]> {
     await this.#page.goto(options.userOptions.crawlStartUrl, {
       waitUntil: ['load']
     })
-    return await passiveCrawl(this.#page, [], options)
+    return await shallowCrawl(this.#page, [], options)
   }
 
   public async activeCrawl(options: CrawlOptionsType) {
-    const activeCrawlResult = await activeCrawl(this.#page, [], options)
+    const activeCrawlResult = await deepCrawl(this.#page, [], options)
     console.log(activeCrawlResult)
     console.log('active crawl done')
     return []
