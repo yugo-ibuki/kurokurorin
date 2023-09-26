@@ -1,26 +1,26 @@
 import { createCrawlCommand } from './crawl'
+import { Command } from 'commander'
 
 const deepCommand = createCrawlCommand()
 
-/** deep crawl コマンド */
-deepCommand
-  .createCommand('deep')
-  .description('細部へのクローリングを行います。')
-  .option(
-    '--crawlTerm <crawlTerm>',
-    'クローリングを行う時間を指定します。',
-    '60'
-  )
-  .option(
-    '--allowedDomain <allowedDomain>',
-    '許可するドメインを指定します。',
-    'localhost'
-  )
-  .option(
-    '--hasLoginProcess <hasLoginProcess>',
-    'ログイン処理が必要かどうかを指定します。',
-    'false'
-  )
+export const deepCommandParse = () => {
+  /** deep crawl コマンド */
+  const cmd = deepCommand
+    .addCommand(
+      new Command('deep')
+        .description('細部へのクローリングを行います。')
+        .argument(
+          '<crawlStartUrl>',
+          'クローリングを開始する URL を指定します。'
+        )
+    )
+    .option(
+      '--loginJson <loginJson>',
+      'ログイン情報を記述したJSONファイルのパスを指定します。'
+    )
 
-deepCommand.parse(process.argv)
+  const parsed = cmd.parse(process.argv)
+  return parsed.opts()
+}
+
 console.log('deepCommand done')
