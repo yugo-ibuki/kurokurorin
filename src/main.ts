@@ -33,7 +33,7 @@ const main = async () => {
     userOptions: { hasLoginProcess, isDeepCrawl }
   } = options
 
-  const browser = await Browser.create()
+  const browser = await Browser.create(options)
   const page = await browser.createPage()
   await page.initialSetup({
     setRequestHook: true
@@ -57,7 +57,7 @@ const main = async () => {
 
   // クローリングを開始
   // shallow crawl 開始
-  const passiveCrawlResultUrls = await page.crawler.shallowCrawl(options)
+  const passiveCrawlResultUrls = await page.crawler.shallowCrawl()
   // 結果を格納
   crawlResult.urls = concatArraysAndWillBeUnique(
     crawlResult.urls,
@@ -66,7 +66,7 @@ const main = async () => {
 
   // deep crawl 開始
   if (isDeepCrawl) {
-    const activeCrawlUrls = await page.crawler.deepCrawl(options)
+    const activeCrawlUrls = await page.crawler.deepCrawl()
     // 結果を格納
     crawlResult.urls = concatArraysAndWillBeUnique(
       crawlResult.urls,

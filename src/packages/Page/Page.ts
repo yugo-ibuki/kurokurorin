@@ -4,6 +4,7 @@ import type { Target } from '@libs/login'
 import { login } from '@libs/login'
 import { Crawler } from '@packages/Crawler'
 import { Log } from '@utils/log'
+import type { CrawlOptionsType } from '@config/CrawlOptions'
 
 type InitialSetup = {
   setRequestHook: boolean
@@ -23,19 +24,25 @@ interface PageInterface {
 export class Page implements PageInterface {
   readonly #page: PuppeteerPage
   readonly #crawler: Crawler
+  readonly #options: CrawlOptionsType
 
-  private constructor(page: PuppeteerPage) {
+  private constructor(page: PuppeteerPage, options: CrawlOptionsType) {
     this.#page = page
-    this.#crawler = new Crawler(this.#page)
+    this.#options = options
+    this.#crawler = new Crawler(this.#page, this.#options)
   }
 
   /**
    * Pageを作成する
    * @param browser
+   * @param options
    */
-  static async createPage(browser: PuppeteerBrowser): Promise<Page> {
+  static async createPage(
+    browser: PuppeteerBrowser,
+    options: CrawlOptionsType
+  ): Promise<Page> {
     const page = await browser.newPage()
-    return new Page(page)
+    return new Page(page, options)
   }
 
   /**

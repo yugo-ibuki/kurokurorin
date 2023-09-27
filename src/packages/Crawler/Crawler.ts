@@ -10,20 +10,22 @@ interface CrawlerInterface {
 
 export class Crawler implements CrawlerInterface {
   readonly #page: PuppeteerPage
+  readonly #options: CrawlOptionsType
 
-  constructor(page: PuppeteerPage) {
+  constructor(page: PuppeteerPage, options: CrawlOptionsType) {
     this.#page = page
+    this.#options = options
   }
 
-  public async shallowCrawl(options: CrawlOptionsType): Promise<string[]> {
-    await this.#page.goto(options.userOptions.crawlStartUrl, {
+  public async shallowCrawl(): Promise<string[]> {
+    await this.#page.goto(this.#options.userOptions.crawlStartUrl, {
       waitUntil: ['load']
     })
-    return await shallowCrawl(this.#page, [], options)
+    return await shallowCrawl(this.#page, [], this.#options)
   }
 
-  public async deepCrawl(options: CrawlOptionsType) {
-    const activeCrawlResult = await deepCrawl(this.#page, [], options)
+  public async deepCrawl() {
+    const activeCrawlResult = await deepCrawl(this.#page, [], this.#options)
     console.log(activeCrawlResult)
     console.log('active crawl done')
     return []
