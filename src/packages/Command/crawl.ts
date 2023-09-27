@@ -3,7 +3,7 @@ import { program } from 'commander'
 import type { CrawlOptionsType } from '@config/CrawlOptions'
 
 /** コマンド作成 */
-export const createCrawlCommand = (): Command => {
+const createCrawlCommand = (): Command => {
   const cmd = program
     /** バージョンの設定 */
     .version('1.0.0')
