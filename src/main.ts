@@ -56,9 +56,9 @@ const main = async () => {
   crawlResult.cookies = await page.getCookies()
 
   // クローリングを開始
-  const passiveCrawlResultUrls = await page.crawler.passiveCrawl(options)
+  const passiveCrawlResultUrls = await page.crawler.shallowCrawl(options)
   if (isDeepCrawl) {
-    const activeCrawlUrls = await page.crawler.activeCrawl(options)
+    const activeCrawlUrls = await page.crawler.deepCrawl(options)
     crawlResult.urls = concatArraysAndWillBeUnique(
       passiveCrawlResultUrls,
       activeCrawlUrls
