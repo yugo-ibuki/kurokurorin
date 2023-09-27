@@ -56,11 +56,20 @@ const main = async () => {
   crawlResult.cookies = await page.getCookies()
 
   // クローリングを開始
+  // shallow crawl 開始
   const passiveCrawlResultUrls = await page.crawler.shallowCrawl(options)
+  // 結果を格納
+  crawlResult.urls = concatArraysAndWillBeUnique(
+    crawlResult.urls,
+    passiveCrawlResultUrls
+  )
+
+  // deep crawl 開始
   if (isDeepCrawl) {
     const activeCrawlUrls = await page.crawler.deepCrawl(options)
+    // 結果を格納
     crawlResult.urls = concatArraysAndWillBeUnique(
-      passiveCrawlResultUrls,
+      crawlResult.urls,
       activeCrawlUrls
     )
   }
