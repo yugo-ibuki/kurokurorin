@@ -12,22 +12,22 @@ describe('log', () => {
     }
   })
 
-  test('logger info: チョークが呼ばれていること', () => {
+  test('logger info: chalk should be called', () => {
     Log.info('info')
     expect(chalk.cyan).toHaveBeenCalled()
   })
 
-  test('logger warn: チョークが呼ばれていること', () => {
+  test('logger warn: chalk should be called', () => {
     Log.warn('warn')
     expect(chalk.yellow).toHaveBeenCalled()
   })
 
-  test('logger error: チョークが呼ばれていること', () => {
+  test('logger error: chalk should be called', () => {
     Log.error('error')
     expect(chalk.red).toHaveBeenCalled()
   })
 
-  test('logger request: チョークが呼ばれていること', () => {
+  test('logger request: chalk should be called', () => {
     Log.request('request')
     expect(chalk.bgGray).toHaveBeenCalled()
   })
