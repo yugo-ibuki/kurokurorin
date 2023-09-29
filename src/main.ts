@@ -96,7 +96,7 @@ const main = async () => {
   Log.info('crawlResult: ', crawlResult)
   Log.info(`Crawling Done in ${takenTime} s`)
 
-  // 結果を出力
+  // Output Result
   await writeJsonToFile(
     crawlResult,
     './results',
