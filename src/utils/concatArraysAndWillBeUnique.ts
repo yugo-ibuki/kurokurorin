@@ -1,8 +1,8 @@
 /**
- * 二つの文字列配列をマージして、重複を削除した配列を返す
+ * Merge two string arrays and return an array with duplicates removed
  * @param arr1
  * @param arr2
- * @returns 重複を削除した配列
+ * @returns - An array with duplicates removed
  */
 export const concatArraysAndWillBeUnique = (
   arr1: string[],
