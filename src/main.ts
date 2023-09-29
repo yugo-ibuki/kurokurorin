@@ -81,6 +81,10 @@ const main = async () => {
 
   console.log('crawlResult: ', crawlResult)
 
+  console.log(
+    `Crawling Done in ${differenceInSeconds(new Date(), startTime)} s`
+  )
+
   // 結果を出力
   await writeJsonToFile(
     crawlResult,
