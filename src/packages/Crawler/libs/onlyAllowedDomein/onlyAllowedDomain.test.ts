@@ -21,6 +21,14 @@ describe('onlyAllowedDomain', () => {
         allowedDomain: 'test.invalid'
       },
       expected: ['https://test.invalid/1', 'https://test.invalid/2']
+    },
+    {
+      name: 'includes invalid URL',
+      args: {
+        urls: ['https://test.invalid/1', 'invalid'],
+        allowedDomain: 'test.invalid'
+      },
+      expected: ['https://test.invalid/1']
     }
   ]
 
