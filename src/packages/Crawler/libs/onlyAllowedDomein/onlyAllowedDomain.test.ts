@@ -11,7 +11,7 @@ describe('onlyAllowedDomain', () => {
     expected: string[]
   }[] = [
     {
-      name: '許可されているドメインのみに絞った URL に限定する',
+      name: 'Restrict URLs to only those allowed by the domain.',
       args: {
         urls: [
           'https://test.invalid/1',
