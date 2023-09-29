@@ -10,10 +10,12 @@ export const onlyAllowedDomain = async (
   return urls
     .filter((url) => {
       // http or https
-      if (url.match(/https?:\/\//)) {
-        const host = new URL(url).host
-        return host.includes(allowedDomain) ? url : undefined
+      if (!url.match(/https?:\/\//)) {
+        return false
       }
+
+      const host = new URL(url).host
+      return host.includes(allowedDomain)
     })
     .filter((url) => url) // undefined を除外
 }
