@@ -33,7 +33,7 @@ export class Page implements PageInterface {
   }
 
   /**
-   * Pageを作成する
+   * Create Page
    * @param browser
    * @param options
    */
@@ -46,7 +46,7 @@ export class Page implements PageInterface {
   }
 
   /**
-   * ログインを行う
+   * login function
    * @param loginData
    */
   public async login(loginData: Target[]) {
@@ -60,21 +60,22 @@ export class Page implements PageInterface {
   }
 
   /**
-   * Cookieを取得する
+   * Get Cookies
+   * @returns - cookies that are set in the browser
    */
   public async getCookies() {
     return await this.#page.cookies()
   }
 
   /**
-   * ページを閉じる
+   * close page
    */
   public async close() {
     await this.#page.close()
   }
 
   /**
-   * Crawlerを行う際のgetter
+   * Do Crawling
    */
   get crawler() {
     return this.#crawler
@@ -90,7 +91,7 @@ export class Page implements PageInterface {
   }
 
   /**
-   * リクエストを送る時のhookを page にセットする
+   * Set the hook which are called when the page sends a request
    */
   private async requestHook() {
     this.#page.on('request', (request) => {
