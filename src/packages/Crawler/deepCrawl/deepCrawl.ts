@@ -3,6 +3,7 @@ import { onlyAllowedDomain } from '@packages/Crawler/libs/onlyAllowedDomein'
 import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 import { Log } from '@utils/log'
 import { searchActionElements } from '@packages/Crawler/libs/searchActionElements'
+import { scrapeATag } from '@packages/Crawler/libs/scrapeATag'
 
 type DeepCrawlOptions = {
   startTime: Date
@@ -38,7 +39,10 @@ export const deepCrawl = async (
   }
 
   console.log('will search action elements')
-  const urls = await searchActionElements(page)
+  const actionElements = await searchActionElements(page)
+  console.log(actionElements)
+
+  const urls = await scrapeATag(page)
 
   // Restrict with allowed domain
   const onlyAllowedDomainUrl = await onlyAllowedDomain(urls, allowedDomain)
@@ -54,8 +58,5 @@ export const deepCrawl = async (
     waitUntil: ['load', 'networkidle2']
   })
 
-  const resultUrls = await deepCrawl(page, uniqueVisitedUrls, options, no + 1)
-  Log.info(resultUrls)
-
-  return []
+  return await deepCrawl(page, uniqueVisitedUrls, options, no + 1)
 }
