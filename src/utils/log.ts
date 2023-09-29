@@ -18,7 +18,7 @@ export const Log: LogInterface = {
 }
 
 const infoLog: LogType = (data) => {
-  console.info(chalk.blue('I: '), ...data)
+  console.info(chalk.cyan('I: '), ...data)
 }
 
 const warnLog: LogType = (data) => {

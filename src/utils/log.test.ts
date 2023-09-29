@@ -5,7 +5,7 @@ import * as chalk from 'chalk'
 describe('log', () => {
   vi.mock('chalk', () => {
     return {
-      blue: vi.fn(),
+      cyan: vi.fn(),
       yellow: vi.fn(),
       red: vi.fn(),
       bgGray: vi.fn()
@@ -14,7 +14,7 @@ describe('log', () => {
 
   test('logger info: チョークが呼ばれていること', () => {
     Log.info('info')
-    expect(chalk.blue).toHaveBeenCalled()
+    expect(chalk.cyan).toHaveBeenCalled()
   })
 
   test('logger warn: チョークが呼ばれていること', () => {
