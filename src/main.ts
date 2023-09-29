@@ -56,18 +56,18 @@ const main = async () => {
   if (hasLoginProcess) {
     const isLoggedIn = await page.login(loginData)
     if (!isLoggedIn) {
-      Log.warn('ログインに失敗しました')
+      Log.warn('Failed to login')
       await page.close()
       await browser.close()
       return
     }
   }
 
-  // クッキーをセット
+  // Set Cookies
   crawlResult.cookies = await page.getCookies()
 
-  // クローリングを開始
-  // shallow crawl 開始
+  // Crawling starts
+  // Shallow Crawl starts
   const passiveCrawlResultUrls = await page.crawler.shallowCrawl()
   // 結果を格納
   crawlResult.urls = concatArraysAndWillBeUnique(
@@ -75,10 +75,10 @@ const main = async () => {
     passiveCrawlResultUrls
   )
 
-  // deep crawl 開始
+  // Deep Crawl starts
   if (isDeepCrawl) {
     const activeCrawlUrls = await page.crawler.deepCrawl()
-    // 結果を格納
+    // Set Result
     crawlResult.urls = concatArraysAndWillBeUnique(
       crawlResult.urls,
       activeCrawlUrls
