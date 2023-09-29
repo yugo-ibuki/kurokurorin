@@ -1,5 +1,6 @@
 import { writeFile, mkdir } from 'fs/promises'
 import { join, dirname } from 'path'
+import { Log } from '@utils/log'
 
 export const writeJsonToFile = async (
   // eslint-disable-next-line
@@ -13,7 +14,7 @@ export const writeJsonToFile = async (
     await makeFileDir(dirname(fullPath))
     const jsonString = JSON.stringify(data, null, 2) // 2つのスペースでインデント
     await writeFile(fullPath, jsonString, 'utf8')
-    console.log(`Data has been written to ${fullPath}`)
+    Log.info(`Data has been written to ${fullPath}`)
   } catch (error) {
     console.error(`Error writing data to file: ${error}`)
   }

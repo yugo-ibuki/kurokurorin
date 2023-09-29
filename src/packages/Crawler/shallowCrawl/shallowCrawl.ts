@@ -2,6 +2,7 @@ import type { Page as PuppeteerPage } from 'puppeteer'
 import { scrapeATag } from '../libs/scrapeATag'
 import { onlyAllowedDomain } from '../libs/onlyAllowedDomein'
 import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
+import { Log } from '@utils/log'
 
 type ShallowCrawlOptions = {
   startTime: Date
@@ -25,7 +26,7 @@ export const shallowCrawl = async (
   options: ShallowCrawlOptions,
   no: number = 0
 ): Promise<string[]> => {
-  console.log('shallowCrawl is called times: ', no)
+  Log.info('shallowCrawl is called times: ', no)
 
   const { startTime } = options
   const { crawlTerm, allowedDomain } = options.userOptions
@@ -36,7 +37,6 @@ export const shallowCrawl = async (
     return visitedUrls
   }
 
-  console.log('will scrape a tag')
   const urls = await scrapeATag(page)
 
   // ドメイン制限
@@ -48,7 +48,6 @@ export const shallowCrawl = async (
     onlyAllowedDomainUrl
   )
 
-  console.log('will go to next page: ', uniqueVisitedUrls[no])
   // 一つずつページに遷移していく
   await page.goto(uniqueVisitedUrls[no], {
     waitUntil: ['load', 'networkidle2']

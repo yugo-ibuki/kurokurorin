@@ -1,6 +1,7 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
 import { onlyAllowedDomain } from '@packages/Crawler/libs/onlyAllowedDomein'
 import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
+import { Log } from '@utils/log'
 
 type DeepCrawlOptions = {
   startTime: Date
@@ -24,7 +25,7 @@ export const deepCrawl = async (
   options: DeepCrawlOptions,
   no: number = 0
 ): Promise<string[]> => {
-  console.log('deepCrawl is called times: ', no)
+  Log.info('deepCrawl is called times: ', no)
 
   const { startTime } = options
   const { crawlTerm, allowedDomain } = options.userOptions
@@ -35,7 +36,6 @@ export const deepCrawl = async (
     return visitedUrls
   }
 
-  console.log('will scrape a tag')
   // const urls = await deepCrawl(page, options)
   const urls = ['']
 
@@ -48,15 +48,13 @@ export const deepCrawl = async (
     onlyAllowedDomainUrl
   )
 
-  console.log('will go to next page: ', uniqueVisitedUrls[no])
-
   // 一つずつページに遷移していく
   await page.goto(uniqueVisitedUrls[no], {
     waitUntil: ['load', 'networkidle2']
   })
 
   const resultUrls = await deepCrawl(page, uniqueVisitedUrls, options, no + 1)
-  console.log(resultUrls)
+  Log.info(resultUrls)
 
   return []
 }

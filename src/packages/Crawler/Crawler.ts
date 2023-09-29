@@ -2,6 +2,7 @@ import type { Page as PuppeteerPage } from 'puppeteer'
 import { shallowCrawl } from './shallowCrawl'
 import type { CrawlOptionsType } from '@config/CrawlOptions'
 import { deepCrawl } from 'packages/Crawler/deepCrawl'
+import { Log } from '@utils/log'
 
 interface CrawlerInterface {
   shallowCrawl(options: CrawlOptionsType): Promise<string[]>
@@ -26,8 +27,8 @@ export class Crawler implements CrawlerInterface {
 
   public async deepCrawl() {
     const activeCrawlResult = await deepCrawl(this.#page, [], this.#options)
-    console.log(activeCrawlResult)
-    console.log('active crawl done')
+    Log.info(activeCrawlResult)
+    Log.info('active crawl done')
     return []
   }
 }

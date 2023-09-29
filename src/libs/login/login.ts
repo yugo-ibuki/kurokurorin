@@ -1,5 +1,6 @@
 import type { Page } from 'puppeteer'
 import type { ElementHandle } from 'puppeteer'
+import { Log } from '@utils/log'
 
 type ClickAction = {
   type: 'click'
@@ -41,7 +42,7 @@ export const login = async (
     await element.evaluate((x) => x.outerHTML)
     // const html = await element.evaluate((x) => x.outerHTML)
     // if (html.includes('login')) {
-    // console.log(html)
+    // Log.info(html)
     // }
 
     if (!element) {
@@ -49,7 +50,7 @@ export const login = async (
       break
     }
 
-    console.log('actions: ', target.actionData)
+    Log.info('actions: ', target.actionData)
     await action(target.actionData, element)
   }
 

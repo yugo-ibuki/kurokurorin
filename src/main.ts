@@ -44,7 +44,7 @@ const main = async () => {
   if (hasLoginProcess) {
     const isLoggedIn = await page.login(loginData)
     if (!isLoggedIn) {
-      console.log('ログインに失敗しました')
+      Log.warn('ログインに失敗しました')
       await page.close()
       await browser.close()
       return
@@ -79,11 +79,9 @@ const main = async () => {
   await page.close()
   await browser.close()
 
-  console.log('crawlResult: ', crawlResult)
+  Log.info('crawlResult: ', crawlResult)
 
-  console.log(
-    `Crawling Done in ${differenceInSeconds(new Date(), startTime)} s`
-  )
+  Log.info(`Crawling Done in ${differenceInSeconds(new Date(), startTime)} s`)
 
   // 結果を出力
   await writeJsonToFile(

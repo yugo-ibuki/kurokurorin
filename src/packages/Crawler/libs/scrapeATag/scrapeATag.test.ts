@@ -4,6 +4,7 @@ import { afterAll, beforeAll, expect } from 'vitest'
 import type { Page, Browser } from 'puppeteer'
 import { launch } from 'puppeteer'
 import { BrowserConfig } from '@config/BrowserConfig'
+import { Log } from '@utils/log'
 
 describe('scrapeATag test', function () {
   let browser: Browser
@@ -22,7 +23,7 @@ describe('scrapeATag test', function () {
   test('Expected Behavior', async () => {
     await page.setContent(fixtures)
     const result = await scrapeATag(page)
-    console.log(result)
+    Log.info(result)
     expect(result).toEqual([
       'https://example.com/',
       'https://example.com/1',
