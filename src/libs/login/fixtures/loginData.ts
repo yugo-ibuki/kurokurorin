@@ -1,6 +1,5 @@
 import type { Target } from '../login'
 
-// サービスに合わせて変更する
 export const data: Target[] = [
   {
     elementData: {
