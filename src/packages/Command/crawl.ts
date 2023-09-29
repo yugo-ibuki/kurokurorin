@@ -2,33 +2,33 @@ import type { Command } from 'commander'
 import { program } from 'commander'
 import type { CrawlOptionsType } from '@config/CrawlOptions'
 
-/** コマンド作成 */
+/**
+ * Create Crawl Command
+ * @returns - crawl command object
+ */
 const createCrawlCommand = (): Command => {
   const cmd = program
-    /** バージョンの設定 */
+    /** Version */
     .version('1.0.0')
 
-  /** オプション */
+  /** Options */
   cmd
     .option(
       '--allowedDomain <allowedDomain>',
-      '許可するドメインを指定します。',
+      // '許可するドメインを指定します。',
+      'Domain to be allowed for requesting',
       'localhost'
     )
-    .option(
-      '--crawlTerm <crawlTerm>',
-      'クローリングを行う時間を指定します。',
-      '60'
-    )
+    .option('--crawlTerm <crawlTerm>', 'Time to crawl in seconds', '60')
     .option(
       '--crawlStartUrl <crawlStartUrl>',
-      'クローリングを開始する URL を指定します。',
+      'Start URL to crawl',
       'http://localhost:3333'
     )
-    .option('--crawlType <crawlType>', 'クローリングの種類を指定します。')
+    .option('--crawlType <crawlType>', 'Type of crawl', 'shallow')
     .option(
       '--loginJson <loginJson>',
-      'ログイン情報を記述したJSONファイルのパスを指定します。'
+      'Path to JSON file that describes login information'
     )
 
   return cmd
