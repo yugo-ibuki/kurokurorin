@@ -18,7 +18,7 @@ const createCrawlCommand = (): Command => {
       'Domain to be allowed for requesting',
       'localhost'
     )
-    .option('--crawlTerm <crawlTerm>', 'Time to crawl in seconds', '60')
+    .option('--crawlTerm <crawlTerm>', 'Time to crawl in seconds', '600')
     .option(
       '--crawlStartUrl <crawlStartUrl>',
       'Start URL to crawl',
