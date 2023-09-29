@@ -11,8 +11,10 @@
     "crawl": "src/packages/Command"
   },
   "scripts": {
-    "crawl:shallow": "tsx src/main.ts shallow http://localhost:3333",
-    "crawl:deep": "tsx src/main.ts deep http://localhost:3333",
+    "crawl": "tsx src/main.ts --crawlStartUrl 'http://localhost:3333' --allowedDomain 'localhost'",
+    "crawl:login": "yarn crawl --loginJson '/src/libs/fixtures/loginData'",
+    "crawl:login:shallow": "yarn crawl:login --crawlType 'shallow' --crawlTerm 18",
+    "crawl:login:deep": "yarn crawl:login --crawlType 'shallow' --crawlTerm 18",
     "build": "tsc -p tsconfig.json",
     "build:bun": "bun build",
     "test": "vitest"
