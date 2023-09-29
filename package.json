@@ -12,9 +12,9 @@
   },
   "scripts": {
     "crawl": "tsx src/main.ts --crawlStartUrl 'http://localhost:3333' --allowedDomain 'localhost'",
-    "crawl:login": "yarn crawl --loginJson '/src/libs/fixtures/loginData'",
-    "crawl:login:shallow": "yarn crawl:login --crawlType 'shallow'",
-    "crawl:login:deep": "yarn crawl:login --crawlType 'deep'",
+    "crawl:login": "pnpm crawl --loginJson '/src/libs/fixtures/loginData'",
+    "crawl:login:shallow": "pnpm crawl:login --crawlType 'shallow'",
+    "crawl:login:deep": "pnpm crawl:login --crawlType 'deep'",
     "build": "tsc -p tsconfig.json",
     "build:bun": "bun build",
     "test": "vitest"
@@ -38,6 +38,6 @@
     "vitest": "^0.34.4"
   },
   "volta": {
-    "node": "20.6.1"
+    "node": "18.7.0"
   }
 }
