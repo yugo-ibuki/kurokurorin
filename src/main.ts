@@ -45,7 +45,7 @@ const main = async () => {
   const result: Result = resultDefault
 
   // Record Start Time
-  result.startTime = format(startTime, 'yyyy/MMdd HH:mm:ss')
+  result.startTime = startTime
 
   const browser = await Browser.create(options)
   const page = await browser.createPage()
@@ -77,7 +77,7 @@ const main = async () => {
   await browser.close()
 
   // Set taken time and end time
-  const takenTime = differenceInSeconds(new Date(), startTime)
+  const takenTime = differenceInSeconds(new Date(), new Date(startTime))
   result.endTime = format(new Date(), 'yyyy/MM/dd HH:mm:ss')
   result.takenTime = `${takenTime} s`
 

@@ -6,7 +6,7 @@ import { searchActionElements } from '@packages/Crawler/libs/searchActionElement
 import { scrapeATag } from '@packages/Crawler/libs/scrapeATag'
 
 type DeepCrawlOptions = {
-  startTime: Date
+  startTime: string
   userOptions: {
     crawlTerm: number
     allowedDomain: string
@@ -33,7 +33,8 @@ export const deepCrawl = async (
   const { crawlTerm, allowedDomain } = options.userOptions
 
   // クローリング指定時間を経過したら終了
-  const isTimeUp = Date.now() - startTime.getTime() >= crawlTerm * 1000
+  const isTimeUp =
+    Date.now() - new Date(startTime).getTime() >= crawlTerm * 1000
   if (isTimeUp) {
     return visitedUrls
   }
@@ -53,6 +54,7 @@ export const deepCrawl = async (
     onlyAllowedDomainUrl
   )
 
+  console.log(uniqueVisitedUrls[no])
   // Go to the next page one by one
   await page.goto(uniqueVisitedUrls[no], {
     waitUntil: ['load', 'networkidle2']

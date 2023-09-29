@@ -5,7 +5,7 @@ import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 import { Log } from '@utils/log'
 
 type ShallowCrawlOptions = {
-  startTime: Date
+  startTime: string
   userOptions: {
     crawlTerm: number
     allowedDomain: string
@@ -32,7 +32,8 @@ export const shallowCrawl = async (
   const { crawlTerm, allowedDomain } = options.userOptions
 
   // クローリング指定時間を経過したら終了
-  const isTimeUp = Date.now() - startTime.getTime() >= crawlTerm * 1000
+  const isTimeUp =
+    Date.now() - new Date(startTime).getTime() >= crawlTerm * 1000
   if (isTimeUp) {
     return visitedUrls
   }

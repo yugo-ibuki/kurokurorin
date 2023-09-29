@@ -1,11 +1,13 @@
 import { getCommandOptions } from '@packages/Command/crawl'
+import { format } from 'date-fns'
+import { ja } from 'date-fns/locale'
 
 /**
  * Required options for crawling
  */
 export type CrawlOptionsType = {
   /** Crawling Start Time */
-  startTime: Date
+  startTime: string
   /** Options the user set */
   userOptions: {
     /** Crawling time */
@@ -30,7 +32,9 @@ export type CrawlOptionsType = {
 export const CrawlOptions = (): CrawlOptionsType => {
   const commandOptions = getCommandOptions()
   return {
-    startTime: new Date(),
+    startTime: format(new Date(), 'yyyy/MM/dd HH:mm:ss', {
+      locale: ja
+    }),
     userOptions: commandOptions
   }
 }
