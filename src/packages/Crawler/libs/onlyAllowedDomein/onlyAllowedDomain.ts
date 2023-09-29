@@ -9,8 +9,11 @@ export const onlyAllowedDomain = async (
 ): Promise<string[]> => {
   return urls
     .filter((url) => {
-      const host = new URL(url).host
-      return host.includes(allowedDomain) ? url : undefined
+      // http or https
+      if (url.match(/https?:\/\//)) {
+        const host = new URL(url).host
+        return host.includes(allowedDomain) ? url : undefined
+      }
     })
     .filter((url) => url) // undefined を除外
 }
