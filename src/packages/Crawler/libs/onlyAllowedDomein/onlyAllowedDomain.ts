@@ -1,7 +1,7 @@
 /**
- * 許可されてるドメインのみに絞った URL に限定する。
- * @param urls - 対象となるURL
- * @param allowedDomain - 許可されているドメイン
+ * Restrict URLs to only those allowed by the domain.
+ * @param urls
+ * @param allowedDomain
  */
 export const onlyAllowedDomain = async (
   urls: string[],
