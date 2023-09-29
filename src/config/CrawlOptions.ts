@@ -1,31 +1,31 @@
 import { getCommandOptions } from '@packages/Command/crawl'
 
 /**
- * クローリングに必要なオプション
+ * Required options for crawling
  */
 export type CrawlOptionsType = {
-  /** クローリングを開始した時刻 */
+  /** Crawling Start Time */
   startTime: Date
-  /** ユーザーが指定するオプション */
+  /** Options the user set */
   userOptions: {
-    /** クローリングを行う時間 */
+    /** Crawling time */
     crawlTerm: number
-    /** 動的クローリングを行うかについてのフラグ */
+    /** Flag for powerful crawl */
     isDeepCrawl: boolean
-    /** クローリングを開始する URL */
+    /** Url to start with */
     crawlStartUrl: string
-    /** 許可するドメイン */
+    /** Domain to be allowed to crawl  */
     allowedDomain: string
-    /** ログイン処理が必要かどうか */
+    /** If it's true, then you need to set loginJson */
     hasLoginProcess: boolean
-    /** ログイン情報を記述したJSON */
+    /** JSON file path that has the login data */
     loginJson: object
   }
 }
 
 /**
- * オプションを取得する
- * @returns クローリングに必要なオプション
+ * Get options for crawling
+ * @returns - Options Required for Crawling
  */
 export const CrawlOptions = (): CrawlOptionsType => {
   const commandOptions = getCommandOptions()
