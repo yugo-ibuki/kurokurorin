@@ -17,18 +17,18 @@ export const Log: LogInterface = {
   request: (...data) => requestLog(data)
 }
 
-const infoLog: LogType = (...data) => {
+const infoLog: LogType = (data) => {
   console.info(chalk.blue('I: '), ...data)
 }
 
-const warnLog: LogType = (...data) => {
+const warnLog: LogType = (data) => {
   console.warn(chalk.yellow('W: '), ...data)
 }
 
-const errorLog: LogType = (...data) => {
+const errorLog: LogType = (data) => {
   console.error(chalk.red('E: '), ...data)
 }
 
-const requestLog: LogType = (...data) => {
+const requestLog: LogType = (data) => {
   console.log(chalk.bgGray('R: '), ...data)
 }

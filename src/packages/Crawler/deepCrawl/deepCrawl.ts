@@ -2,6 +2,7 @@ import type { Page as PuppeteerPage } from 'puppeteer'
 import { onlyAllowedDomain } from '@packages/Crawler/libs/onlyAllowedDomein'
 import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 import { Log } from '@utils/log'
+import { searchActionElements } from '@packages/Crawler/libs/searchActionElements'
 
 type DeepCrawlOptions = {
   startTime: Date
@@ -36,8 +37,7 @@ export const deepCrawl = async (
     return visitedUrls
   }
 
-  // const urls = await deepCrawl(page, options)
-  const urls = ['']
+  const urls = await searchActionElements(page)
 
   // ドメイン制限
   const onlyAllowedDomainUrl = await onlyAllowedDomain(urls, allowedDomain)
