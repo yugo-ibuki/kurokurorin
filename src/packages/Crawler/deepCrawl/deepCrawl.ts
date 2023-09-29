@@ -37,6 +37,7 @@ export const deepCrawl = async (
     return visitedUrls
   }
 
+  console.log('will search action elements')
   const urls = await searchActionElements(page)
 
   // ドメイン制限

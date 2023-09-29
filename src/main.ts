@@ -3,26 +3,32 @@ import { data } from '@libs/login/fixtures/loginData'
 import { Browser } from '@packages/Browser'
 import { CrawlOptions } from '@config/CrawlOptions'
 import { writeJsonToFile } from '@utils/writeJsonToFile'
-import { differenceInSeconds } from 'date-fns'
+import { differenceInSeconds, format } from 'date-fns'
 import type { Protocol } from 'puppeteer'
 import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 import { Log } from '@utils/log'
 
-// NOTE: ここでログイン情報を取得する。現在はダミー
+// NOTE: This is dummy data for login
 const loginData: Target[] = data
 
 /**
- * クローリング結果の型
+ * CrawlResult Object Type
  */
 type CrawlResult = {
+  startTime?: string
+  endTime?: string
+  takenTime?: string
   urls: string[]
   cookies: Protocol.Network.Cookie[]
 }
 
 /**
- * クローリング結果を格納するオブジェクトのデフォルト値
+ * Default Object for CrawlResult
  */
 const crawlResultDefault: CrawlResult = {
+  startTime: undefined,
+  endTime: undefined,
+  takenTime: undefined,
   urls: [],
   cookies: []
 }
@@ -34,6 +40,12 @@ const main = async () => {
     startTime,
     userOptions: { hasLoginProcess, isDeepCrawl }
   } = options
+
+  // Final Crawling Result
+  const crawlResult: CrawlResult = crawlResultDefault
+
+  // Record Start Time
+  crawlResult.startTime = format(startTime, 'yyyy-MM-dd HH:mm:ss')
 
   const browser = await Browser.create(options)
   const page = await browser.createPage()
@@ -50,9 +62,6 @@ const main = async () => {
       return
     }
   }
-
-  // 最終的な結果となるオブジェクト
-  const crawlResult: CrawlResult = crawlResultDefault
 
   // クッキーをセット
   crawlResult.cookies = await page.getCookies()
@@ -79,9 +88,13 @@ const main = async () => {
   await page.close()
   await browser.close()
 
-  Log.info('crawlResult: ', crawlResult)
+  // Set taken time and end time
+  const takenTime = differenceInSeconds(new Date(), startTime)
+  crawlResult.endTime = format(new Date(), 'yyyy/MM/dd HH:mm:ss')
+  crawlResult.takenTime = `${takenTime} s`
 
-  Log.info(`Crawling Done in ${differenceInSeconds(new Date(), startTime)} s`)
+  Log.info('crawlResult: ', crawlResult)
+  Log.info(`Crawling Done in ${takenTime} s`)
 
   // 結果を出力
   await writeJsonToFile(
