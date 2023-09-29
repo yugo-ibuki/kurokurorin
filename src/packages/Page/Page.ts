@@ -82,7 +82,7 @@ export class Page implements PageInterface {
   }
 
   /**
-   * ブラウザに埋め込ませる処理の初期設定
+   * Initial setup of the process and hooks to be used in the browser
    */
   public async initialSetup(params: InitialSetup = initialSetupDefaultParams) {
     if (params.setRequestHook) {

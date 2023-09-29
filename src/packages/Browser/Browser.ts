@@ -19,7 +19,7 @@ export class Browser implements BrowserInterface {
   }
 
   /**
-   * Browserを作成するファクトリーメソッド
+   * Factory Method to create Browser
    */
   static async create(options: CrawlOptionsType): Promise<Browser> {
     const browser = await launch(BrowserConfig)
@@ -27,14 +27,14 @@ export class Browser implements BrowserInterface {
   }
 
   /**
-   * Pageを作成する
+   * Create Page
    */
   public async createPage(): Promise<Page> {
     return await Page.createPage(this.#browser, this.#options)
   }
 
   /**
-   * Browserを閉じる
+   * Close Browser
    */
   public async close() {
     await this.#browser.close()
