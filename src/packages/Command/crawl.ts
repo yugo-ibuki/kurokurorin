@@ -15,7 +15,6 @@ const createCrawlCommand = (): Command => {
   cmd
     .option(
       '--allowedDomain <allowedDomain>',
-      // '許可するドメインを指定します。',
       'Domain to be allowed for requesting',
       'localhost'
     )
