@@ -13,9 +13,9 @@ type TypeAction = {
 
 export type Target = {
   elementData: {
-    /** 取得したい対象の要素の属性 */
+    /** The attribute name to search for */
     selectorType: 'class' | 'id' | 'name'
-    /** 取得したい対象の要素の属性値 */
+    /** The value of the attribute */
     selectorName: string
   }
   actionData: ClickAction | TypeAction
@@ -64,11 +64,11 @@ export const login = async (
 }
 
 /**
- * 取得したい対象の要素のセレクターのクエリを取得します。
- * @param elementData - 取得したい対象の要素に対する情報
- * @param elementData.element.selectorType - 取得したい対象の要素の属性
- * @param elementData.element.selectorName - 取得したい対象の要素の名前
- * @returns - 取得したい対象の要素のセレクター
+ * Get the selector query of the element you want to get.
+ * @param elementData
+ * @param elementData.element.selectorType
+ * @param elementData.element.selectorName
+ * @returns - selector query
  */
 const createSelectorQuery = async (
   elementData: Target['elementData']
@@ -101,11 +101,11 @@ const createSelectorQuery = async (
 }
 
 /**
- * 取得したい対象の要素に対するアクションを実行します。
- * @param actionData - 取得したい対象の要素に対するアクションの情報
- * @param actionData.type - 取得したい対象の要素に対するアクションの種類
- * @param actionData.value - 取得したい対象の要素に対するアクションの値
- * @param element - ページから取得された対象の要素
+ * Action to be performed on the element you want to get.
+ * @param actionData - Data on the action to be performed on the element you want to get.
+ * @param actionData.type - Type of action to be performed on the element you want to get.
+ * @param actionData.value - The value of the action on the element you want to get.
+ * @param element - The element you want to get from the page.
  */
 const action = async (
   actionData: Target['actionData'],
@@ -113,12 +113,12 @@ const action = async (
 ): Promise<void> => {
   const actionType = actionData.type
 
-  // typeの場合はvalueをinputにタイプする
+  // if it is 'type', type value in the input
   if (actionType === 'type') {
     await element.type(actionData.value)
   }
 
-  // clickの場合はクリックする
+  // if it is 'click', click element
   if (actionType === 'click') {
     await element.click()
   }
