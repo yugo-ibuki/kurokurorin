@@ -14,7 +14,7 @@ const loginData: Target[] = data
 /**
  * CrawlResult Object Type
  */
-type CrawlResult = {
+type Result = {
   startTime?: string
   endTime?: string
   takenTime?: string
@@ -25,7 +25,7 @@ type CrawlResult = {
 /**
  * Default Object for CrawlResult
  */
-const crawlResultDefault: CrawlResult = {
+const resultDefault: Result = {
   startTime: undefined,
   endTime: undefined,
   takenTime: undefined,
@@ -42,10 +42,10 @@ const main = async () => {
   } = options
 
   // Final Crawling Result
-  const crawlResult: CrawlResult = crawlResultDefault
+  const result: Result = resultDefault
 
   // Record Start Time
-  crawlResult.startTime = format(startTime, 'yyyy/MMdd HH:mm:ss')
+  result.startTime = format(startTime, 'yyyy/MMdd HH:mm:ss')
 
   const browser = await Browser.create(options)
   const page = await browser.createPage()
@@ -64,44 +64,28 @@ const main = async () => {
   }
 
   // Set Cookies
-  crawlResult.cookies = await page.getCookies()
+  result.cookies = await page.getCookies()
 
   // Crawling starts
-  // Shallow Crawl starts
-  const passiveCrawlResultUrls = await page.crawler.shallowCrawl()
-  // 結果を格納
-  crawlResult.urls = concatArraysAndWillBeUnique(
-    crawlResult.urls,
-    passiveCrawlResultUrls
-  )
+  const crawlResult = isDeepCrawl
+    ? await page.crawler.deepCrawl()
+    : await page.crawler.shallowCrawl()
 
-  // Deep Crawl starts
-  if (isDeepCrawl) {
-    const activeCrawlUrls = await page.crawler.deepCrawl()
-    // Set Result
-    crawlResult.urls = concatArraysAndWillBeUnique(
-      crawlResult.urls,
-      activeCrawlUrls
-    )
-  }
+  result.urls = concatArraysAndWillBeUnique(result.urls, crawlResult)
 
   await page.close()
   await browser.close()
 
   // Set taken time and end time
   const takenTime = differenceInSeconds(new Date(), startTime)
-  crawlResult.endTime = format(new Date(), 'yyyy/MM/dd HH:mm:ss')
-  crawlResult.takenTime = `${takenTime} s`
+  result.endTime = format(new Date(), 'yyyy/MM/dd HH:mm:ss')
+  result.takenTime = `${takenTime} s`
 
-  Log.info('crawlResult: ', crawlResult)
+  Log.info('result: ', result)
   Log.info(`Crawling Done in ${takenTime} s`)
 
   // Output Result
-  await writeJsonToFile(
-    crawlResult,
-    './results',
-    `crawlResult-${Date.now()}.json`
-  )
+  await writeJsonToFile(result, './results', `result-${Date.now()}.json`)
 }
 
 main()
