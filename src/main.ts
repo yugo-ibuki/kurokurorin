@@ -45,7 +45,7 @@ const main = async () => {
   const crawlResult: CrawlResult = crawlResultDefault
 
   // Record Start Time
-  crawlResult.startTime = format(startTime, 'yyyy-MM-dd HH:mm:ss')
+  crawlResult.startTime = format(startTime, 'yyyy/MMdd HH:mm:ss')
 
   const browser = await Browser.create(options)
   const page = await browser.createPage()
