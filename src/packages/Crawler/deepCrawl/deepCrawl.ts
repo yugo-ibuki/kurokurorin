@@ -13,12 +13,12 @@ type DeepCrawlOptions = {
 }
 
 /**
- * 複数のタグに対し、動作を行い url を収集し、再帰的にクローリングしていく。
- * @param page - puppeteer の page オブジェクト
- * @param visitedUrls - 既に訪れた URL の配列
- * @param options - クローリングに必要なオプション
- * @param no - 何番目の URL か
- * @returns - 重複排除された URL の配列
+ * Recursive Crawling with multiple tags and Get URLs.
+ * @param page - puppeteer's page object
+ * @param visitedUrls - URLs that have already been visited
+ * @param options - Options required for crawling
+ * @param no - Number of process
+ * @returns - Array of unique URLs
  */
 export const deepCrawl = async (
   page: PuppeteerPage,
@@ -40,16 +40,16 @@ export const deepCrawl = async (
   console.log('will search action elements')
   const urls = await searchActionElements(page)
 
-  // ドメイン制限
+  // Restrict with allowed domain
   const onlyAllowedDomainUrl = await onlyAllowedDomain(urls, allowedDomain)
 
-  // マージして重複排除
+  // Merge and remove duplicates
   const uniqueVisitedUrls = concatArraysAndWillBeUnique(
     visitedUrls,
     onlyAllowedDomainUrl
   )
 
-  // 一つずつページに遷移していく
+  // Go to the next page one by one
   await page.goto(uniqueVisitedUrls[no], {
     waitUntil: ['load', 'networkidle2']
   })
