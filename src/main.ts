@@ -6,6 +6,7 @@ import { writeJsonToFile } from '@utils/writeJsonToFile'
 import { differenceInSeconds } from 'date-fns'
 import type { Protocol } from 'puppeteer'
 import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
+import { Log } from '@utils/log'
 
 // NOTE: ここでログイン情報を取得する。現在はダミー
 const loginData: Target[] = data
@@ -28,6 +29,7 @@ const crawlResultDefault: CrawlResult = {
 
 const main = async () => {
   const options = CrawlOptions()
+  Log.info('CRAWLING OPTIONS: ', options)
   const {
     startTime,
     userOptions: { hasLoginProcess, isDeepCrawl }
@@ -85,8 +87,6 @@ const main = async () => {
     './results',
     `crawlResult-${Date.now()}.json`
   )
-
-  console.log(`Done in ${differenceInSeconds(new Date(), startTime)} s`)
 }
 
 main()
