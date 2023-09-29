@@ -1,9 +1,9 @@
 import type { Page as PuppeteerPage } from 'puppeteer'
 
 /**
- * ページ内の a タグを収集する
+ * Get a tags in the page.
  * @param page
- * @returns a タグの href 属性にある URL の配列
+ * @returns a tag urls which is in the href attribute
  */
 export const scrapeATag = async (page: PuppeteerPage): Promise<string[]> => {
   const aTagUrls = await page.$$eval('a', (elements) => {
