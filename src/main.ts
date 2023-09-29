@@ -50,7 +50,7 @@ const main = async () => {
   const browser = await Browser.create(options)
   const page = await browser.createPage()
   await page.initialSetup({
-    setRequestHook: true
+    setRequestHook: false
   })
 
   if (hasLoginProcess) {
