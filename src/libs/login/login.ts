@@ -54,7 +54,7 @@ export const login = async (
     await action(target.actionData, element)
   }
 
-  Log.info('all actions are done. wait for navigation...')
+  Log.info('all login actions are done. wait for navigation...')
 
   // 画面の遷移をURLの変更を検知して待つ
   await page.waitForNavigation({
