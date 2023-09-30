@@ -56,7 +56,7 @@ export const login = async (
 
   Log.info('all login actions are done. wait for navigation...')
 
-  // 画面の遷移をURLの変更を検知して待つ
+  // wait for the page transition after login actions
   await page.waitForNavigation({
     timeout: 10000, // 10秒
     waitUntil: 'load'
@@ -79,18 +79,18 @@ const createSelectorQuery = async (
   const selectorName = elementData.selectorName
   let selectorQuery = ''
 
-  // selectorTypeによってセレクターのクエリを変更する
+  // Change the query of the selector depending on the selectorType.
   switch (selectorType) {
     case 'name':
-      // name属性の場合は[name="name属性の値"]というクエリになる
+      // if it is name attribute, it becomes a query of [name="name attribute value"]
       selectorQuery = `[name="${selectorName}"]`
       break
     case 'id':
-      // id属性の場合は#id属性の値というクエリになる
+      // if it is id attribute, it becomes a query of #id attribute value
       selectorQuery = `#${selectorName}`
       break
     case 'class':
-      // class属性の場合は.class属性の値というクエリになる
+      // if it is class attribute, it becomes a query of .class attribute value
       selectorQuery = `.${selectorName}`
       break
     default:
