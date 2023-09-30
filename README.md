@@ -12,3 +12,9 @@ Please treat it as a crawling pet like a Rumba, vacuuming machine.
 ## crawl test site
 
 security crawl maze
+
+https://github.com/google/security-crawl-maze
+
+clone and run the repo above with docker
+
+then, open `localhost:80`
