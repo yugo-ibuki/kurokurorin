@@ -38,7 +38,7 @@ export const login = async (
       throw new Error('element is empty')
     }
 
-    // htmlをstringとして取得
+    // get the html as string
     await element.evaluate((x) => x.outerHTML)
     // const html = await element.evaluate((x) => x.outerHTML)
     // if (html.includes('login')) {
