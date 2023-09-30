@@ -7,8 +7,6 @@ import { Log } from '@utils/log'
  * @param page
  */
 export const searchActionElements = async (page: Page): Promise<string[]> => {
-  Log.info('will search action elements')
-
   const actionElements = await page.$$eval(
     'button, input, select, textarea',
     (elements) => {
