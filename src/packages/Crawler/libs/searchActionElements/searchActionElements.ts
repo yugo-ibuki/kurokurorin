@@ -1,4 +1,5 @@
 import type { Page } from 'puppeteer'
+import { Log } from '@utils/log'
 
 /**
  * Scrape the page for action elements.
@@ -6,6 +7,8 @@ import type { Page } from 'puppeteer'
  * @param page
  */
 export const searchActionElements = async (page: Page): Promise<string[]> => {
+  Log.info('will search action elements')
+
   const actionElements = await page.$$eval(
     'button, input, select, textarea',
     (elements) => {
@@ -13,6 +16,6 @@ export const searchActionElements = async (page: Page): Promise<string[]> => {
     }
   )
 
-  console.log('actionsElements: ', actionElements)
+  Log.info('actionsElements: ', actionElements)
   return []
 }

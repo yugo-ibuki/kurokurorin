@@ -39,7 +39,6 @@ export const deepCrawl = async (
     return visitedUrls
   }
 
-  console.log('will search action elements')
   const actionElements = await searchActionElements(page)
   console.log(actionElements)
 
@@ -53,6 +52,11 @@ export const deepCrawl = async (
     visitedUrls,
     onlyAllowedDomainUrl
   )
+
+  // If there is no URL to go to, then done
+  if (!uniqueVisitedUrls[no]) {
+    return visitedUrls
+  }
 
   console.log(uniqueVisitedUrls[no])
   // Go to the next page one by one
