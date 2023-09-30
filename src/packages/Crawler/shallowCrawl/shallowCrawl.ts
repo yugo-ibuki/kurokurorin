@@ -13,12 +13,12 @@ type ShallowCrawlOptions = {
 }
 
 /**
- * a タグのみを収集し、再帰的にクローリングしていく。
- * @param page - puppeteer の page オブジェクト
- * @param visitedUrls - 既に訪れた URL の配列
- * @param options - クローリングに必要なオプション
- * @param no - 何番目の URL か
- * @returns - 重複排除された URL の配列
+ * Recursive Crawling for collecting a tag URL
+ * @param page - puppeteer page object
+ * @param visitedUrls - the urls you already visited
+ * @param options - options for crawling
+ * @param no - the number of the process
+ * @returns - unique urls
  */
 export const shallowCrawl = async (
   page: PuppeteerPage,
