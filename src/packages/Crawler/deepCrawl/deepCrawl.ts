@@ -57,7 +57,7 @@ export const deepCrawl = async (
   console.log(uniqueVisitedUrls[no])
   // Go to the next page one by one
   await page.goto(uniqueVisitedUrls[no], {
-    waitUntil: ['load', 'networkidle2']
+    waitUntil: ['networkidle0']
   })
 
   return await deepCrawl(page, uniqueVisitedUrls, options, no + 1)

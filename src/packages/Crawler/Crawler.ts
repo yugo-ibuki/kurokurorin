@@ -32,7 +32,7 @@ export class Crawler implements CrawlerInterface {
 
   private async firstPageCrawl(): Promise<void> {
     await this.#page.goto(this.#options.userOptions.crawlStartUrl, {
-      waitUntil: ['load']
+      waitUntil: ['networkidle0']
     })
   }
 

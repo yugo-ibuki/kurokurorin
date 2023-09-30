@@ -51,7 +51,7 @@ export const shallowCrawl = async (
 
   // 一つずつページに遷移していく
   await page.goto(uniqueVisitedUrls[no], {
-    waitUntil: ['load', 'networkidle2']
+    waitUntil: ['networkidle0']
   })
 
   return await shallowCrawl(page, uniqueVisitedUrls, options, no + 1)
