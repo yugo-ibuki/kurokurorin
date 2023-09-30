@@ -40,16 +40,16 @@ export const shallowCrawl = async (
 
   const urls = await scrapeATag(page)
 
-  // ドメイン制限
+  // Restrict with allowed domain
   const onlyAllowedDomainUrl = await onlyAllowedDomain(urls, allowedDomain)
 
-  // マージして重複排除
+  // merge the urls and make them unique
   const uniqueVisitedUrls = concatArraysAndWillBeUnique(
     urls,
     onlyAllowedDomainUrl
   )
 
-  // 一つずつページに遷移していく
+  // the transition of the url one by one
   await page.goto(uniqueVisitedUrls[no], {
     waitUntil: ['networkidle0']
   })
