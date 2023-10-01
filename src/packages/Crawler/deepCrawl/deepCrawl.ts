@@ -2,7 +2,7 @@ import type { Page as PuppeteerPage } from 'puppeteer'
 import { onlyAllowedDomain } from '@packages/Crawler/libs/onlyAllowedDomein'
 import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 import { Log } from '@utils/log'
-import { searchActionElements } from '@packages/Crawler/libs/searchActionElements'
+import { scrapeActionElements } from 'packages/Crawler/libs/scrapeActionElements'
 import { scrapeATag } from '@packages/Crawler/libs/scrapeATag'
 
 type DeepCrawlOptions = {
@@ -49,7 +49,7 @@ export const deepCrawl = async (
   const urls = await scrapeATag(page)
   const elementsInPage: ElementsInPage = {
     pageUrl: page.url(),
-    actionElements: await searchActionElements(page)
+    actionElements: await scrapeActionElements(page)
   }
   actionElementsInPages.push(elementsInPage)
 
