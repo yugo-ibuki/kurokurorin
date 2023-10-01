@@ -7,6 +7,7 @@ import { differenceInSeconds, format } from 'date-fns'
 import type { Protocol } from 'puppeteer'
 import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 import { Log } from '@utils/log'
+import type { ElementsInPage } from '@packages/Crawler'
 
 // NOTE: This is dummy data for login
 const loginData: Target[] = data
@@ -20,6 +21,7 @@ type Result = {
   takenTime?: string
   urls: string[]
   cookies: Protocol.Network.Cookie[]
+  elementsInPage: ElementsInPage[]
 }
 
 /**
@@ -30,7 +32,8 @@ const resultDefault: Result = {
   endTime: undefined,
   takenTime: undefined,
   urls: [],
-  cookies: []
+  cookies: [],
+  elementsInPage: []
 }
 
 const main = async () => {
@@ -66,12 +69,23 @@ const main = async () => {
   // Set Cookies
   result.cookies = await page.getCookies()
 
+  // TODO: move the deep crawl and shallow crawl functions to Crawl class and leads to the following one by arg
   // Crawling starts
-  const crawlResult = isDeepCrawl
-    ? await page.crawler.deepCrawl()
-    : await page.crawler.shallowCrawl()
+  // Shallow Crawl
+  if (!isDeepCrawl) {
+    const urls = await page.crawler.shallowCrawl()
+    result.urls = concatArraysAndWillBeUnique(result.urls, urls)
+  }
 
-  result.urls = concatArraysAndWillBeUnique(result.urls, crawlResult)
+  // Deep Crawl
+  if (isDeepCrawl) {
+    const crawlResult = await page.crawler.deepCrawl()
+    result.urls = concatArraysAndWillBeUnique(
+      result.urls,
+      crawlResult.visitedUrls
+    )
+    result.elementsInPage = crawlResult.elementsInPage
+  }
 
   await page.close()
   await browser.close()

@@ -4,6 +4,7 @@ import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 import { Log } from '@utils/log'
 import { scrapeActionElements } from 'packages/Crawler/libs/scrapeActionElements'
 import { scrapeATag } from '@packages/Crawler/libs/scrapeATag'
+import type { ElementsInPage } from '@packages/Crawler'
 
 type DeepCrawlOptions = {
   startTime: string
@@ -11,11 +12,6 @@ type DeepCrawlOptions = {
     crawlTerm: number
     allowedDomain: string
   }
-}
-
-type ElementsInPage = {
-  pageUrl: string
-  elements: string[]
 }
 
 type DeepCrawl = {
