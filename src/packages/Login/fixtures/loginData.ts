@@ -1,4 +1,4 @@
-import type { Target } from '../login'
+import type { Target } from '@packages/Action/types'
 
 export const data: Target[] = [
   {
