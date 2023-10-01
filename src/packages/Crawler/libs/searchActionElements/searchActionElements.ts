@@ -15,5 +15,5 @@ export const searchActionElements = async (page: Page): Promise<string[]> => {
   )
 
   Log.info('actionsElements: ', actionElements)
-  return []
+  return actionElements
 }

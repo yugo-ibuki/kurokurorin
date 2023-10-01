@@ -26,7 +26,7 @@ export class Crawler implements CrawlerInterface {
 
   public async deepCrawl(): Promise<string[]> {
     await this.firstPageCrawl()
-    this.#visitedUrls = await deepCrawl(this.#page, [], this.#options)
+    this.#visitedUrls = await deepCrawl(this.#page, [], [], this.#options)
     return this.#visitedUrls
   }
 

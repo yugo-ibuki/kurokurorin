@@ -13,10 +13,16 @@ type DeepCrawlOptions = {
   }
 }
 
+type ElementsInPage = {
+  pageUrl: string
+  actionElements: string[]
+}
+
 /**
  * Recursive Crawling with multiple tags and Get URLs.
  * @param page - puppeteer's page object
  * @param visitedUrls - URLs that have already been visited
+ * @param actionElementsInPages - Array of action elements in each page
  * @param options - Options required for crawling
  * @param no - Number of process
  * @returns - Array of unique URLs
@@ -24,6 +30,7 @@ type DeepCrawlOptions = {
 export const deepCrawl = async (
   page: PuppeteerPage,
   visitedUrls: string[] = [],
+  actionElementsInPages: ElementsInPage[] = [],
   options: DeepCrawlOptions,
   no: number = 0
 ): Promise<string[]> => {
@@ -39,10 +46,12 @@ export const deepCrawl = async (
     return visitedUrls
   }
 
-  const actionElements = await searchActionElements(page)
-  console.log(actionElements)
-
   const urls = await scrapeATag(page)
+  const elementsInPage: ElementsInPage = {
+    pageUrl: page.url(),
+    actionElements: await searchActionElements(page)
+  }
+  actionElementsInPages.push(elementsInPage)
 
   // Restrict with allowed domain
   const onlyAllowedDomainUrl = await onlyAllowedDomain(urls, allowedDomain)
@@ -64,5 +73,11 @@ export const deepCrawl = async (
     waitUntil: ['networkidle0']
   })
 
-  return await deepCrawl(page, uniqueVisitedUrls, options, no + 1)
+  return await deepCrawl(
+    page,
+    uniqueVisitedUrls,
+    actionElementsInPages,
+    options,
+    no + 1
+  )
 }
