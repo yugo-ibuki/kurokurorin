@@ -1,5 +1,5 @@
-import type { Target } from '@libs/login'
-import { data } from '@libs/login/fixtures/loginData'
+import type { Target } from '@packages/Action/types'
+import { data } from '@packages/Login/fixtures/loginData'
 import { Browser } from '@packages/Browser'
 import { CrawlOptions } from '@config/CrawlOptions'
 import { writeJsonToFile } from '@utils/writeJsonToFile'

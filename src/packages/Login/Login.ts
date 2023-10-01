@@ -1,6 +1,6 @@
 import type { Page } from 'puppeteer'
-import { createSelectorQuery } from '@packages/Action/libs/createSelectorQuery'
-import type { Target } from '@packages/Action/libs/createSelectorQuery'
+import { createSelectorQuery } from '@packages/Action/libs'
+import type { Target } from '@packages/Action/types'
 import { Log } from '@utils/log'
 import { action } from '@packages/Action/libs/action'
 
@@ -8,7 +8,7 @@ export const login = async (
   page: Page,
   targets: Target[]
 ): Promise<boolean> => {
-  await page.goto('http://localhot:3333/login', {
+  await page.goto('http://localhost:3333/login', {
     waitUntil: ['load', 'networkidle2']
   })
 
