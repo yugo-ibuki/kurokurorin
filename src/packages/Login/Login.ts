@@ -1,8 +1,7 @@
 import type { Page } from 'puppeteer'
-import { createSelectorQuery } from '@packages/Action/libs'
 import type { Target } from '@packages/Action/types'
 import { Log } from '@utils/log'
-import { action } from '@packages/Action/libs/action'
+import { Action } from '@packages/Action'
 
 export const login = async (
   page: Page,
@@ -14,8 +13,9 @@ export const login = async (
 
   let isSucceeded = true
 
+  const action = new Action()
   for (const target of targets) {
-    const selectorQuery = await createSelectorQuery(target.elementData)
+    const selectorQuery = await action.createSelectorQuery(target.elementData)
     const element = await page.$(selectorQuery)
     if (!element) {
       throw new Error('element is empty')
@@ -34,7 +34,7 @@ export const login = async (
     }
 
     Log.info('actions: ', target.actionData)
-    await action(target.actionData, element)
+    await action.run(target.actionData, element)
   }
 
   Log.info('all login actions are done. wait for navigation...')

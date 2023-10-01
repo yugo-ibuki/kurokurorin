@@ -4,11 +4,11 @@ import { createSelectorQuery } from '@packages/Action/libs'
 import type { ElementHandle } from 'puppeteer'
 
 interface ActionInterface {
-  action: (
+  run: (
     actionData: Target['actionData'],
     element: ElementHandle<Element>
   ) => Promise<void>
-  element: (elementData: Target['elementData']) => Promise<string>
+  createSelectorQuery: (elementData: Target['elementData']) => Promise<string>
 }
 
 export class Action implements ActionInterface {
