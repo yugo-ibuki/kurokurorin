@@ -2,35 +2,35 @@ import type { Browser as PuppeteerBrowser } from 'puppeteer'
 import { launch } from 'puppeteer'
 import { BrowserConfig } from '@config/BrowserConfig'
 import { Page } from '@packages/Page'
-import type { CrawlOptionsType } from '@config/CrawlOptions'
+import { Context } from '@packages/Context'
 
 interface BrowserInterface {
   createPage(): Promise<Page>
   close(): Promise<void>
 }
 
-export class Browser implements BrowserInterface {
+export class Browser extends Context implements BrowserInterface {
   readonly #browser: PuppeteerBrowser
-  readonly #options: CrawlOptionsType
 
-  private constructor(browser: PuppeteerBrowser, options: CrawlOptionsType) {
+  private constructor(browser: PuppeteerBrowser) {
+    super()
     this.#browser = browser
-    this.#options = options
   }
 
   /**
    * Factory Method to create Browser
    */
-  static async create(options: CrawlOptionsType): Promise<Browser> {
+  static async create(): Promise<Browser> {
     const browser = await launch(BrowserConfig)
-    return new Browser(browser, options)
+    // browser is private, so it should be set on constructor
+    return new Browser(browser)
   }
 
   /**
    * Create Page
    */
   public async createPage(): Promise<Page> {
-    return await Page.createPage(this.#browser, this.#options)
+    return await Page.createPage(this.#browser, this.options)
   }
 
   /**
