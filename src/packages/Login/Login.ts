@@ -23,10 +23,6 @@ export const login = async (
 
     // get the html as string
     await element.evaluate((x) => x.outerHTML)
-    // const html = await element.evaluate((x) => x.outerHTML)
-    // if (html.includes('login')) {
-    // Log.info(html)
-    // }
 
     if (!element) {
       isSucceeded = false
