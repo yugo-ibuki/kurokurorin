@@ -15,14 +15,19 @@ type DeepCrawlOptions = {
 
 type ElementsInPage = {
   pageUrl: string
-  actionElements: string[]
+  elements: string[]
+}
+
+type DeepCrawl = {
+  visitedUrls: string[]
+  elementsInPage: ElementsInPage[]
 }
 
 /**
  * Recursive Crawling with multiple tags and Get URLs.
  * @param page - puppeteer's page object
  * @param visitedUrls - URLs that have already been visited
- * @param actionElementsInPages - Array of action elements in each page
+ * @param elementsInPage - Array of action elements in each page
  * @param options - Options required for crawling
  * @param no - Number of process
  * @returns - Array of unique URLs
@@ -30,10 +35,10 @@ type ElementsInPage = {
 export const deepCrawl = async (
   page: PuppeteerPage,
   visitedUrls: string[] = [],
-  actionElementsInPages: ElementsInPage[] = [],
+  elementsInPage: ElementsInPage[] = [],
   options: DeepCrawlOptions,
   no: number = 0
-): Promise<string[]> => {
+): Promise<DeepCrawl> => {
   Log.info('deepCrawl is called times: ', no)
 
   const { startTime } = options
@@ -43,15 +48,18 @@ export const deepCrawl = async (
   const isTimeUp =
     Date.now() - new Date(startTime).getTime() >= crawlTerm * 1000
   if (isTimeUp) {
-    return visitedUrls
+    return {
+      visitedUrls,
+      elementsInPage
+    }
   }
 
   const urls = await scrapeATag(page)
-  const elementsInPage: ElementsInPage = {
+  const actionElementsInPage: ElementsInPage = {
     pageUrl: page.url(),
-    actionElements: await scrapeActionElements(page)
+    elements: await scrapeActionElements(page)
   }
-  actionElementsInPages.push(elementsInPage)
+  elementsInPage.push(actionElementsInPage)
 
   // Restrict with allowed domain
   const onlyAllowedDomainUrl = await onlyAllowedDomain(urls, allowedDomain)
@@ -64,7 +72,10 @@ export const deepCrawl = async (
 
   // If there is no URL to go to, then done
   if (!uniqueVisitedUrls[no]) {
-    return visitedUrls
+    return {
+      visitedUrls,
+      elementsInPage
+    }
   }
 
   console.log(uniqueVisitedUrls[no])
@@ -76,7 +87,7 @@ export const deepCrawl = async (
   return await deepCrawl(
     page,
     uniqueVisitedUrls,
-    actionElementsInPages,
+    elementsInPage,
     options,
     no + 1
   )
