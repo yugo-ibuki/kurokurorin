@@ -3,7 +3,6 @@ import { scrapeATag } from './scrapeATag'
 import { afterAll, beforeAll, expect } from 'vitest'
 import type { Page, Browser } from 'puppeteer'
 import { launch } from 'puppeteer'
-import { BrowserConfig } from '@config/BrowserConfig'
 import { Log } from '@utils/log'
 
 describe('scrapeATag test', function () {
@@ -11,7 +10,9 @@ describe('scrapeATag test', function () {
   let page: Page
 
   beforeAll(async () => {
-    browser = await launch(BrowserConfig)
+    browser = browser = await launch({
+      headless: true
+    })
     page = await browser.newPage()
   })
 

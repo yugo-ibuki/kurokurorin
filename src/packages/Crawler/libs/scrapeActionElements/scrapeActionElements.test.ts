@@ -2,7 +2,6 @@ import { afterAll, beforeAll, describe, expect } from 'vitest'
 import { scrapeActionElements } from './scrapeActionElements'
 import type { Page, Browser } from 'puppeteer'
 import { launch } from 'puppeteer'
-import { BrowserConfig } from '@config/BrowserConfig'
 import { fixtures } from './fixtures'
 
 const selectExpected = `
@@ -19,7 +18,9 @@ describe('scrapeActionElements', () => {
   let page: Page
 
   beforeAll(async () => {
-    browser = await launch(BrowserConfig)
+    browser = await launch({
+      headless: true
+    })
     page = await browser.newPage()
   })
 
