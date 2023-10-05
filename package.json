@@ -15,7 +15,7 @@
     "crawl:login": "pnpm crawl --loginJson '/src/libs/fixtures/loginData'",
     "crawl:login:shallow": "pnpm crawl:login --crawlType 'shallow'",
     "crawl:login:deep": "pnpm crawl:login --crawlType 'deep'",
-    "crawl:no-login": "tsx src/main.ts --crawlStartUrl 'http://localhost:80/html/body/isindex/action.html' --crawlType 'deep' --allowedDomain 'localhost'",
+    "crawl:no-login:80": "tsx src/main.ts --crawlStartUrl 'http://localhost:80' --crawlType 'deep' --allowedDomain 'localhost'",
     "build": "tsc -p tsconfig.json",
     "build:bun": "bun build",
     "test": "vitest"
