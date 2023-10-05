@@ -3,11 +3,12 @@ import { data } from '@packages/Login/fixtures/loginData'
 import { Browser } from '@packages/Browser'
 import { CrawlOptions } from '@config/CrawlOptions'
 import { writeJsonToFile } from '@utils/writeJsonToFile'
-import { differenceInSeconds, format } from 'date-fns'
+import { differenceInSeconds } from 'date-fns'
 import type { Protocol } from 'puppeteer'
 import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 import { Log } from '@utils/log'
 import type { ElementsInPage } from '@packages/Crawler'
+import { formatDate } from '@utils/date'
 
 // NOTE: This is dummy data for login
 const loginData: Target[] = data
@@ -92,7 +93,7 @@ const main = async () => {
 
   // Set taken time and end time
   const takenTime = differenceInSeconds(new Date(), new Date(startTime))
-  result.endTime = format(new Date(), 'yyyy/MM/dd HH:mm:ss')
+  result.endTime = formatDate(new Date())
   result.takenTime = `${takenTime} s`
 
   Log.info('result: ', result)

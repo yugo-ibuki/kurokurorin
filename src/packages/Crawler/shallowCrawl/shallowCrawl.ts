@@ -3,6 +3,7 @@ import { scrapeATag } from '../libs/scrapeATag'
 import { onlyAllowedDomain } from '../libs/onlyAllowedDomein'
 import { concatArraysAndWillBeUnique } from '@utils/concatArraysAndWillBeUnique'
 import { Log } from '@utils/log'
+import { checkTimeIsUp } from '@utils/date'
 
 type ShallowCrawlOptions = {
   startTime: string
@@ -32,8 +33,7 @@ export const shallowCrawl = async (
   const { crawlTerm, allowedDomain } = options.userOptions
 
   // クローリング指定時間を経過したら終了
-  const isTimeUp =
-    Date.now() - new Date(startTime).getTime() >= crawlTerm * 1000
+  const isTimeUp = checkTimeIsUp(startTime, crawlTerm)
   if (isTimeUp) {
     return visitedUrls
   }
