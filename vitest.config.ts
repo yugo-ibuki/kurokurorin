@@ -8,7 +8,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@config': path.join(__dirname, 'src/config')
+      '@config': path.join(__dirname, 'src/config'),
+      '@utils': path.join(__dirname, 'src/utils')
     }
   }
 })

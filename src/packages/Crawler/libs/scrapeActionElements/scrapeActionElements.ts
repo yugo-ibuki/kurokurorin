@@ -11,7 +11,9 @@ export const scrapeActionElements = async (page: Page): Promise<string[]> => {
   const actionElements = await page.$$eval(
     'button, input, select, textarea',
     (elements) => {
-      return elements.map((element) => element.outerHTML)
+      return elements.map((element) =>
+        element.outerHTML.replace(/\>\s+\</g, '><').trim()
+      )
     }
   )
 
