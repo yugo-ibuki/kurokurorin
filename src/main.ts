@@ -51,7 +51,8 @@ const main = async () => {
   // Record Start Time
   result.startTime = startTime
 
-  const browser = await Browser.create(options)
+  const browser = await Browser.create()
+  browser.options = options
   const page = await browser.createPage()
   await page.initialSetup({
     setRequestHook: false

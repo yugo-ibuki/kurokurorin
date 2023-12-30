@@ -5,6 +5,7 @@ import { login } from '@packages/Login'
 import { Crawler } from '@packages/Crawler'
 import { Log } from '@utils/log'
 import type { CrawlOptionsType } from '@config/CrawlOptions'
+import { Context } from '@packages/Context'
 
 type InitialSetup = {
   setRequestHook: boolean
@@ -21,15 +22,15 @@ interface PageInterface {
   initialSetup(initialSetupDefaultParams: InitialSetup): Promise<void>
 }
 
-export class Page implements PageInterface {
+export class Page extends Context implements PageInterface {
   readonly #page: PuppeteerPage
   readonly #crawler: Crawler
-  readonly #options: CrawlOptionsType
 
   private constructor(page: PuppeteerPage, options: CrawlOptionsType) {
+    super()
     this.#page = page
-    this.#options = options
-    this.#crawler = new Crawler(this.#page, this.#options)
+    this.options = options
+    this.#crawler = new Crawler(this.#page, this.options)
   }
 
   /**
