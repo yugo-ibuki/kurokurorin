@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "chalk": "4",
-    "commander": "^11.0.0",
+    "commander": "^12.0.0",
     "date-fns": "^2.30.0",
     "puppeteer": "^21.2.1",
     "zod": "^3.22.2"
